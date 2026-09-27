@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDownRight, ArrowRight, Instagram, Play, Sparkles } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import { ProductCard } from "@/components/site/ProductCard";
+import { ZKChromeMark } from "@/components/site/ZKChromeMark";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 
@@ -32,7 +33,8 @@ function Home() {
   return (
     <div className="overflow-hidden">
       <section className="zk-grain relative min-h-[72svh] sm:min-h-[calc(100svh-4.5rem)]">
-        <img src={heroImg} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={heroImg} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="zk-hero-depth absolute inset-0 h-full w-full object-cover" />
+        <ZKChromeMark />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
 
