@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, BadgeCheck, Instagram, MessageCircle, Play, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Instagram, Play, Sparkles } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import { ProductCard } from "@/components/site/ProductCard";
 import { Button } from "@/components/ui/button";
@@ -9,19 +9,21 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
-      { name: "description", content: "Streetwear premium da CORRES DO ZK. Drops autorais, tiragens limitadas e produção local." },
+      { name: "description", content: "Streetwear da CORRES DO ZK. Nascida na rua. Feita pro seu corre." },
       { property: "og:title", content: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
-      { property: "og:description", content: "Streetwear premium em tiragem limitada." },
+      { property: "og:description", content: "Nascida na rua. Feita pro seu corre." },
     ],
   }),
   component: Home,
 });
 
 const categories = [
-  { label: "Camisetas", kicker: "01 / ESSENCIAIS", state: "available" },
-  { label: "Moletons", kicker: "02 / HEAVYWEIGHT", state: "available" },
-  { label: "Calças", kicker: "03 / EM BREVE", state: "soon" },
-  { label: "Acessórios", kicker: "04 / EM BREVE", state: "soon" },
+  { label: "Camisetas", kicker: "01 / CAMISETAS", state: "available" },
+  { label: "Moletons", kicker: "02 / MOLETONS", state: "available" },
+  { label: "Conjuntos", kicker: "03 / CONJUNTOS", state: "available" },
+  { label: "Calças", kicker: "04 / CALÇAS", state: "available" },
+  { label: "Boné", kicker: "05 / BONÉ", state: "available" },
+  { label: "Acessórios", kicker: "06 / EM BREVE", state: "soon" },
 ] as const;
 
 function Home() {
@@ -46,7 +48,7 @@ function Home() {
               <span className="text-primary">Feita pro seu corre.</span>
             </h1>
             <p className="mt-6 max-w-lg text-sm leading-6 text-white/65 sm:text-base">
-              Streetwear autoral para acompanhar seu corre. Peças com presença, produção local e identidade sem fórmula.
+              Streetwear autoral para acompanhar seu corre. Peças com presença e identidade.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="h-12 px-7 text-xs font-bold uppercase tracking-[0.16em]">
@@ -72,22 +74,6 @@ function Home() {
         </div>
       </div>
 
-      <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 sm:grid-cols-4">
-          {[
-            { Icon: Truck, label: "Envio para todo o Brasil" },
-            { Icon: MessageCircle, label: "Atendimento via WhatsApp" },
-            { Icon: BadgeCheck, label: "Produtos de qualidade" },
-            { Icon: ShieldCheck, label: "Pagamento seguro" },
-          ].map(({ Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 border-b border-border p-4 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 sm:px-5">
-              <Icon className="h-4 w-4 shrink-0 text-primary" />
-              <span className="text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-muted-foreground">{label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
         <div className="grid gap-8 md:grid-cols-[.75fr_1.25fr] md:items-end">
           <div>
@@ -98,10 +84,10 @@ function Home() {
             Quatro caminhos. Uma mesma assinatura. Comece pelas peças que já estão no drop ou acompanhe os próximos movimentos.
           </p>
         </div>
-        <div className="mt-10 grid border-y border-border sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid border-y border-border sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, index) => (
             category.state === "available" ? (
-              <Link key={category.label} to="/loja" className="zk-focus group border-b border-border p-6 transition-colors hover:bg-card sm:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
+              <Link key={category.label} to="/loja" search={{ categoria: category.label }} className="zk-focus group border-b border-border p-6 transition-colors hover:bg-card sm:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
                 <p className="text-[9px] font-bold tracking-[0.2em] text-primary">{category.kicker}</p>
                 <div className="mt-14 flex items-end justify-between gap-3">
                   <h3 className="text-3xl">{category.label}</h3>
@@ -160,7 +146,7 @@ function Home() {
               <Sparkles className="h-5 w-5" />
               <p className="zk-eyebrow mt-8 text-primary-foreground/70">Primeiro drop</p>
               <p className="zk-title mt-3 text-4xl">Feito para ficar.</p>
-              <p className="mt-5 text-sm leading-6 text-primary-foreground/75">Frete grátis acima de R$ 399. Troca em até 7 dias.</p>
+              <p className="mt-5 text-sm leading-6 text-primary-foreground/75">Frete e pagamento são confirmados pelo WhatsApp.</p>
             </div>
           </div>
         </div>
