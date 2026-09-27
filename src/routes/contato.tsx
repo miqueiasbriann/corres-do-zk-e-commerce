@@ -29,7 +29,7 @@ function Contato() {
   const [sending, setSending] = useState(false);
 
   return (
-    <div className="mx-auto max-w-2xl px-5 py-20">
+    <div className="mx-auto max-w-2xl px-5 py-16 sm:py-24">
       <p className="zk-eyebrow">Fala com a gente</p>
       <h1 className="zk-title mt-3 text-5xl">Contato</h1>
       <p className="mt-4 text-sm text-muted-foreground">
@@ -37,7 +37,7 @@ function Contato() {
       </p>
 
       <form
-        className="mt-10 space-y-5"
+        className="zk-surface mt-10 space-y-5 rounded-sm p-5 sm:p-7"
         onSubmit={(e) => {
           e.preventDefault();
           setSending(true);
