@@ -8,9 +8,9 @@ import { products } from "@/data/products";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CORRES DO ZK — NÃO É SORTE. É PROCESSO." },
+      { title: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
       { name: "description", content: "Streetwear premium da CORRES DO ZK. Drops autorais, tiragens limitadas e produção local." },
-      { property: "og:title", content: "CORRES DO ZK — NÃO É SORTE. É PROCESSO." },
+      { property: "og:title", content: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
       { property: "og:description", content: "Streetwear premium em tiragem limitada." },
     ],
   }),
@@ -34,20 +34,19 @@ function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
 
-        <div className="relative mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-7xl items-end px-5 pb-12 sm:px-6 sm:pb-16">
+        <div className="relative mx-auto flex min-h-[72svh] max-w-7xl items-end px-5 pb-10 sm:min-h-[calc(100svh-4.5rem)] sm:px-6 sm:pb-16">
           <div className="max-w-5xl">
             <div className="flex items-center gap-3 text-primary">
               <span className="zk-red-rule" />
               <p className="zk-eyebrow text-primary">CORRES DO ZK / DROP 01</p>
             </div>
-            <h1 className="zk-title mt-5 text-[4.5rem] leading-[.84] sm:text-8xl lg:text-[9.5rem]">
-              Não é sorte.
+            <h1 className="zk-title mt-5 max-w-4xl text-[4rem] leading-[.86] sm:text-7xl lg:text-[8rem]">
+              Nascida na rua.
               <br />
-              <span className="text-primary">É processo.</span>
+              <span className="text-primary">Feita pro seu corre.</span>
             </h1>
-            <p className="mt-7 max-w-lg text-sm leading-6 text-white/65 sm:text-base">
-              Streetwear pesado para quem sabe que estilo também é disciplina.
-              Tiragens limitadas, produção local e identidade sem atalho.
+            <p className="mt-6 max-w-lg text-sm leading-6 text-white/65 sm:text-base">
+              Streetwear autoral para acompanhar seu corre. Peças com presença, produção local e identidade sem fórmula.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="h-12 px-7 text-xs font-bold uppercase tracking-[0.16em]">
@@ -76,14 +75,14 @@ function Home() {
       <section className="border-b border-border bg-background">
         <div className="mx-auto grid max-w-7xl grid-cols-2 sm:grid-cols-4">
           {[
-            [Truck, "Envio para todo o Brasil"],
-            [MessageCircle, "Atendimento via WhatsApp"],
-            [BadgeCheck, "Produtos de qualidade"],
-            [ShieldCheck, "Pagamento seguro"],
-          ].map(([Icon, label]) => (
-            <div key={label as string} className="flex items-center gap-3 border-b border-border p-4 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 sm:px-5">
+            { Icon: Truck, label: "Envio para todo o Brasil" },
+            { Icon: MessageCircle, label: "Atendimento via WhatsApp" },
+            { Icon: BadgeCheck, label: "Produtos de qualidade" },
+            { Icon: ShieldCheck, label: "Pagamento seguro" },
+          ].map(({ Icon, label }) => (
+            <div key={label} className="flex items-center gap-3 border-b border-border p-4 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 sm:px-5">
               <Icon className="h-4 w-4 shrink-0 text-primary" />
-              <span className="text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-muted-foreground">{label as string}</span>
+              <span className="text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-muted-foreground">{label}</span>
             </div>
           ))}
         </div>
