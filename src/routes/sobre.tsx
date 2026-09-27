@@ -5,7 +5,7 @@ export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
       { title: "Manifesto — CORRES DO ZK" },
-      { name: "description", content: "O manifesto e a história da CORRES DO ZK." },
+      { name: "description", content: "Nascida na rua. Feita pro seu corre." },
     ],
   }),
   component: Sobre,
@@ -25,7 +25,7 @@ function Sobre() {
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-[.65fr_1.35fr]">
-          <div><p className="zk-eyebrow">A origem</p><h2 className="zk-title mt-3 text-5xl">Nascido no corre.</h2></div>
+          <div><p className="zk-eyebrow">A identidade</p><h2 className="zk-title mt-3 text-5xl">Nascida na rua.</h2></div>
           <div className="max-w-3xl space-y-7 text-sm leading-7 text-muted-foreground">
             <p className="text-xl leading-8 text-foreground/85">Nascida na rua. Feita pro seu corre.</p>
             <p>Uma identidade streetwear construída para acompanhar o corre de quem veste a marca.</p>
@@ -48,7 +48,7 @@ function Sobre() {
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-24">
           <p className="zk-eyebrow text-primary">O que não muda</p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {["Material com presença","Produção em pequena escala","Identidade sem fórmula"].map((item, i) => (
+            {["Nascida na rua","Feita pro seu corre","Identidade própria"].map((item, i) => (
               <div key={item} className="zk-surface p-7"><span className="text-[10px] font-bold text-primary">0{i+1}</span><h3 className="mt-12 text-2xl">{item}</h3></div>
             ))}
           </div>
