@@ -28,7 +28,7 @@ function Loja() {
               <p className="zk-eyebrow text-primary">Drop atual / 01</p>
               <h1 className="zk-title mt-3 text-7xl sm:text-8xl">Coleção</h1>
               <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
-                Não é sorte. É processo. Peças de presença, produzidas em pequenas tiragens para quem vive o corre.
+                Nascida na rua. Feita pro seu corre. Peças de presença, produzidas em pequenas tiragens.
               </p>
             </div>
             <div className="border-l-2 border-primary pl-5">
@@ -55,7 +55,7 @@ function Loja() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
           {lista.map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
 
