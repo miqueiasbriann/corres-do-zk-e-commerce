@@ -51,7 +51,7 @@ function normalizeStoredItems(value: unknown): CartItem[] {
     const product = getProduct(item.slug);
     if (!product) return [];
 
-    const color = item.color || product.colors[0];
+    const color = item.color || product.colors[0] || "";
     const maxQty = getVariantStock(product, item.size, color);
     if (maxQty <= 0) return [];
 
