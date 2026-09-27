@@ -59,7 +59,7 @@ function Home() {
               </Link>
             </div>
             <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/15 pt-5 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/45">
-              <span>Algodão pesado</span><span>Produção local</span><span>Drop limitado</span><span>Brasil</span>
+              <span>Streetwear</span><span>Identidade própria</span><span>Feita pro seu corre</span>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ function Home() {
             <h2 className="zk-title mt-3 text-5xl sm:text-6xl">A coleção</h2>
           </div>
           <p className="max-w-md text-sm leading-6 text-muted-foreground md:justify-self-end">
-            Quatro caminhos. Uma mesma assinatura. Comece pelas peças que já estão no drop ou acompanhe os próximos movimentos.
+            Explore as categorias da marca e encontre as peças que já estão disponíveis.
           </p>
         </div>
         <div className="mt-10 grid border-y border-border sm:grid-cols-2 lg:grid-cols-3">
@@ -122,7 +122,7 @@ function Home() {
           </div>
           <div className="max-w-2xl space-y-6 text-sm leading-7 text-muted-foreground">
             <p className="text-lg leading-8 text-foreground/80">Nascida na rua. Feita pro seu corre. A CORRES DO ZK transforma rotina, disciplina e identidade em roupa para usar todos os dias.</p>
-            <p>Por isso nossos drops são pequenos, nossos materiais são escolhidos com cuidado e nossa estética não precisa pedir licença. É roupa para quem faz acontecer sem transformar esforço em discurso vazio.</p>
+            <p>Uma identidade própria para acompanhar o seu corre.</p>
             <Link to="/sobre" className="zk-focus inline-flex border-b border-primary pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Conheça a marca</Link>
           </div>
         </div>
@@ -144,8 +144,8 @@ function Home() {
             </div>
             <div className="border border-border bg-primary p-8 text-primary-foreground sm:p-10">
               <Sparkles className="h-5 w-5" />
-              <p className="zk-eyebrow mt-8 text-primary-foreground/70">Primeiro drop</p>
-              <p className="zk-title mt-3 text-4xl">Feito para ficar.</p>
+              <p className="zk-eyebrow mt-8 text-primary-foreground/70">CORRES DO ZK</p>
+              <p className="zk-title mt-3 text-4xl">Feita pro seu corre.</p>
               <p className="mt-5 text-sm leading-6 text-primary-foreground/75">Frete e pagamento são confirmados pelo WhatsApp.</p>
             </div>
           </div>
