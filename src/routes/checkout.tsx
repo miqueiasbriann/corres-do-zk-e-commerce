@@ -17,7 +17,7 @@ export const Route = createFileRoute("/checkout")({
   component: Checkout,
 });
 
-const WHATSAPP_NUMBER = "5518997087679";
+const WHATSAPP_URL = "https://wa.me/5518997087679";
 
 function Checkout() {
   const { items, total } = useCart();
@@ -55,7 +55,7 @@ function Checkout() {
       "Este pedido não está pago.",
     ];
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+    const url = `${WHATSAPP_URL}?text=${encodeURIComponent(lines.join("\n"))}`;
     setSending(true);
     window.open(url, "_blank", "noopener,noreferrer");
     window.setTimeout(() => setSending(false), 700);
