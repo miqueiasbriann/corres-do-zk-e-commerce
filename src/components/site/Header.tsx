@@ -6,8 +6,9 @@ import { CartSheet } from "./CartSheet";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const nav = [
+  { to: "/", label: "Início" },
   { to: "/loja", label: "Coleção" },
-  { to: "/sobre", label: "Manifesto" },
+  { to: "/sobre", label: "A marca" },
   { to: "/contato", label: "Contato" },
 ] as const;
 
@@ -21,7 +22,7 @@ export function Header() {
         <div className="flex items-center gap-10">
           <Link to="/" className="zk-focus rounded-sm" aria-label="CORRES DO ZK — início">
             <span className="zk-title text-xl tracking-tight sm:text-2xl">
-              CORRES <span className="text-primary">DO ZK</span>
+              CORRES DO <span className="text-primary">ZK</span>
             </span>
           </Link>
 
