@@ -36,10 +36,10 @@ function Home() {
           alt="Campanha CORRES DO ZK"
           width={1600}
           height={1008}
-          className="h-[78vh] w-full object-cover"
+          className="h-[72svh] min-h-[560px] w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/10" />
-        <div className="absolute inset-0 mx-auto flex max-w-7xl flex-col justify-end px-5 pb-16">
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/65 to-background/5" />
+        <div className="absolute inset-0 mx-auto flex max-w-7xl flex-col justify-end px-5 pb-12 sm:pb-16">
           <p className="zk-eyebrow">Drop 01 — Quebrada</p>
           <h1 className="zk-title mt-4 max-w-3xl text-5xl sm:text-7xl lg:text-8xl">
             Sonhos não morrem,
@@ -73,7 +73,7 @@ function Home() {
         </div>
       </div>
 
-      <section className="mx-auto max-w-7xl px-5 py-20">
+      <section className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
         <div className="flex items-end justify-between gap-4">
           <h2 className="zk-title text-4xl sm:text-5xl">Destaques</h2>
           <Link
@@ -90,8 +90,8 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-t border-border bg-card/40">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 md:grid-cols-3">
+      <section className="border-y border-border/70 bg-card/50">
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 py-16 sm:gap-6 sm:py-20 md:grid-cols-3">
           {[
             {
               t: "Algodão pesado",
@@ -106,7 +106,7 @@ function Home() {
               d: "Produção local, parceria com costureiras e serígrafos do bairro.",
             },
           ].map((f) => (
-            <div key={f.t}>
+            <div key={f.t} className="zk-surface p-6 sm:p-7">
               <h3 className="text-xl">{f.t}</h3>
               <p className="mt-3 text-sm text-muted-foreground">{f.d}</p>
             </div>
