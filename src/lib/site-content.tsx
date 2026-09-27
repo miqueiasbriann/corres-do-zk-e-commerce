@@ -10,7 +10,7 @@ import hero from "@/WhatsApp Image 2026-09-27 at 12.04.13.jpeg";
 import editorial from "@/WhatsApp Image 2026-09-27 at 11.53.21.jpeg";
 import hoodie from "@/assets/p-hoodie.jpg";
 import tee from "@/assets/p-tee.jpg";
-import logo from "@/WhatsApp Image 2026-09-27 at 11.25.50.jpeg";
+import logo from "@/assets/logo-zk-original.webp";
 import mascot from "@/WhatsApp Image 2026-09-27 at 11.27.36.jpeg";
 import { products } from "@/data/products";
 
