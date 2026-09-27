@@ -70,7 +70,7 @@ type SiteContentContextValue = {
 };
 
 const SiteContentContext = createContext<SiteContentContextValue | null>(null);
-const STORAGE_KEY = "zk-site-content-v2";
+const STORAGE_KEY = "zk-site-content-v3";
 
 function normalizeGallery(value: unknown, fallback: string[]) {
   if (Array.isArray(value)) {
@@ -110,8 +110,21 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem("zk-site-content-v1");
-      if (raw) setContent(mergeContent(JSON.parse(raw) as Partial<SiteContent>));
+      const currentRaw = localStorage.getItem(STORAGE_KEY);
+      if (currentRaw) {
+        setContent(mergeContent(JSON.parse(currentRaw) as Partial<SiteContent>));
+      } else {
+        const legacyRaw =
+          localStorage.getItem("zk-site-content-v2") ??
+          localStorage.getItem("zk-site-content-v1");
+        if (legacyRaw) {
+          const migrated = mergeContent(JSON.parse(legacyRaw) as Partial<SiteContent>);
+          migrated.images.logo = defaultSiteContent.images.logo;
+          migrated.images.mascot = defaultSiteContent.images.mascot;
+          if (!migrated.images.heroMobile) migrated.images.heroMobile = migrated.images.hero;
+          setContent(migrated);
+        }
+      }
     } catch {
       // Defaults stay active when local content cannot be read.
     } finally {
