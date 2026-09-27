@@ -75,7 +75,7 @@ function Home() {
               src={content.images.mascot}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-2 right-[1.5%] z-[3] hidden h-auto w-[28vw] max-w-[410px] object-contain drop-shadow-[0_24px_26px_rgba(0,0,0,.55)] lg:block"
+              className="pointer-events-none absolute bottom-3 right-[2%] z-[3] hidden h-auto w-[23vw] max-w-[300px] object-contain drop-shadow-[0_24px_26px_rgba(0,0,0,.55)] lg:block"
             />
           </>
         )}
