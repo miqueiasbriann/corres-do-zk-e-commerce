@@ -1,57 +1,59 @@
-import { createFileRoute } from "@tanstack/react-router";
-import heroImg from "@/assets/hero.jpg";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Manifesto — CORRES DO ZK" },
-      { name: "description", content: "Nascida na rua. Feita pro seu corre." },
+      { title: "A Marca — CORRES DO ZK" },
+      { name: "description", content: "O corre não para. O estilo acompanha." },
     ],
   }),
   component: Sobre,
 });
 
 function Sobre() {
+  const { content } = useSiteContent();
+
   return (
-    <div>
-      <section className="zk-grain relative h-[58svh] min-h-[440px]">
-        <img src={heroImg} alt="CORRES DO ZK" width={1600} height={1008} className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-black/20" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-5 pb-12 sm:px-6 sm:pb-16">
-          <p className="zk-eyebrow text-primary">Manifesto / 001</p>
-          <h1 className="zk-title mt-3 max-w-4xl text-6xl sm:text-8xl">Nascida na rua.<br /><span className="text-primary">Feita pro seu corre.</span></h1>
+    <div className="bg-[#090909] text-white">
+      <section className="relative min-h-[560px] overflow-hidden border-b border-white/10 sm:min-h-[640px]">
+        <img src={content.images.hero} alt="CORRES DO ZK" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover object-center" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.56)_52%,rgba(0,0,0,.2))]" />
+        <div className="absolute inset-0 zk-grit-overlay" />
+        <div className="relative mx-auto flex min-h-[560px] max-w-[1320px] items-end px-4 pb-12 sm:min-h-[640px] sm:px-6 sm:pb-16 lg:px-8">
+          <div className="max-w-3xl">
+            <img src={content.images.logo} alt="CORRES DO ZK" className="h-auto w-[240px] max-w-[62vw] object-contain sm:w-[320px]" />
+            <p className="zk-eyebrow mt-8 text-primary">A marca / identidade</p>
+            <h1 className="zk-title mt-3 text-6xl sm:text-8xl">O corre não para.</h1>
+            <p className="zk-hand mt-2 text-4xl text-primary sm:text-6xl">O estilo acompanha.</p>
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
-        <div className="grid gap-14 lg:grid-cols-[.65fr_1.35fr]">
-          <div><p className="zk-eyebrow">A identidade</p><h2 className="zk-title mt-3 text-5xl">Nascida na rua.</h2></div>
-          <div className="max-w-3xl space-y-7 text-sm leading-7 text-muted-foreground">
-            <p className="text-xl leading-8 text-foreground/85">Nascida na rua. Feita pro seu corre.</p>
-            <p>Uma identidade streetwear construída para acompanhar o corre de quem veste a marca.</p>
-            <p>CORRES DO ZK é a expressão de uma identidade feita para acompanhar o corre.</p>
+      <section className="mx-auto max-w-[1320px] px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
+          <div>
+            <p className="zk-eyebrow text-primary">CORRES DO ZK</p>
+            <h2 className="zk-title mt-3 text-5xl sm:text-6xl">Presença de rua. Identidade própria.</h2>
+          </div>
+          <div className="max-w-2xl space-y-6 text-sm leading-7 text-white/55 sm:text-base sm:leading-8">
+            <p className="text-xl font-semibold leading-8 text-white">Nascida na rua. Feita pro seu corre.</p>
+            <p>A CORRES DO ZK transforma atitude, rotina e identidade em uma linguagem visual direta: preto, branco e vermelho, fotografia de moda e peças que ficam no centro da cena.</p>
+            <p>O foco da marca é simples: roupa com presença para acompanhar o seu corre.</p>
+            <Link to="/loja" className="zk-focus inline-flex items-center border-b border-primary pb-2 text-[9px] font-black uppercase tracking-[0.2em] text-primary">Ver coleção <ArrowRight className="ml-2 h-3.5 w-3.5" /></Link>
           </div>
         </div>
+      </section>
 
-        <div className="mt-16 border-y border-border">
-          <div className="grid gap-4 p-7 sm:grid-cols-3 sm:p-8">
-            {["Nascida na rua","Feita pro seu corre","CORRES DO ZK"].map((item, i) => (
-              <div key={item} className="border-b border-border pb-4 last:border-b-0 sm:border-b-0 sm:border-r sm:pb-0 sm:pr-6 sm:last:border-r-0">
-                <p className="text-[10px] font-bold text-primary">0{i + 1}</p>
-                <p className="zk-title mt-4 text-2xl">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>    </section>
-
-      <section className="border-y border-border bg-card/30">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-24">
-          <p className="zk-eyebrow text-primary">O que não muda</p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {["Nascida na rua","Feita pro seu corre","Identidade própria"].map((item, i) => (
-              <div key={item} className="zk-surface p-7"><span className="text-[10px] font-bold text-primary">0{i+1}</span><h3 className="mt-12 text-2xl">{item}</h3></div>
-            ))}
-          </div>
+      <section className="border-y border-white/10 bg-black">
+        <div className="mx-auto grid max-w-[1320px] gap-px bg-white/10 sm:grid-cols-3">
+          {["O corre não para.", "O estilo acompanha.", "Sua identidade."].map((item, index) => (
+            <div key={item} className="bg-[#0a0a0a] p-7 sm:p-9">
+              <span className="text-[9px] font-black text-primary">0{index + 1}</span>
+              <h3 className="zk-title mt-10 text-3xl">{item}</h3>
+            </div>
+          ))}
         </div>
       </section>
     </div>
