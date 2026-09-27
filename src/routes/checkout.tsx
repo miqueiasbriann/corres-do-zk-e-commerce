@@ -22,6 +22,7 @@ const WHATSAPP_NUMBER = "5518997087679";
 function Checkout() {
   const { items, total } = useCart();
   const [sending, setSending] = useState(false);
+  const [colors, setColors] = useState<Record<string, string>>({});
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,7 +47,7 @@ function Checkout() {
       "PRODUTOS",
       ...items.map(
         (item) =>
-          `- ${item.name} | Tamanho: ${item.size} | Cor: não informada no catálogo | Quantidade: ${item.qty} | ${formatBRL(item.price * item.qty)}`,
+          `- ${item.name} | Tamanho: ${item.size} | Cor: ${colors[item.slug + "-" + item.size] || "Não informada"} | Quantidade: ${item.qty} | ${formatBRL(item.price * item.qty)}`,
       ),
       "",
       `Subtotal: ${formatBRL(total)}`,
@@ -158,8 +159,23 @@ function Checkout() {
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold">{item.name}</p>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Tam. {item.size} · Qtd. {item.qty} · Cor não informada
+                    Tam. {item.size} · Qtd. {item.qty}
                   </p>
+                  <div className="mt-3 space-y-1.5">
+                    <Label htmlFor={"cor-" + item.slug + "-" + item.size} className="text-[9px] uppercase tracking-[0.16em] text-muted-foreground">Cor</Label>
+                    <Input
+                      id={"cor-" + item.slug + "-" + item.size}
+                      value={colors[item.slug + "-" + item.size] ?? ""}
+                      onChange={(event) =>
+                        setColors((prev) => ({
+                          ...prev,
+                          [item.slug + "-" + item.size]: event.target.value,
+                        }))
+                      }
+                      placeholder="Informe a cor"
+                      className="h-9 text-xs"
+                    />
+                  </div>
                 </div>
                 <p className="text-sm font-semibold">{formatBRL(item.price * item.qty)}</p>
               </div>
