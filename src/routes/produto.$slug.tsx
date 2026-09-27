@@ -76,8 +76,8 @@ function Produto() {
 
           <div className="mt-7 grid gap-3 border-t border-border pt-6 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground sm:grid-cols-3">
             <div className="flex gap-2"><Check className="h-4 w-4 shrink-0 text-primary" /> {product.stock} peças disponíveis</div>
-            <div className="flex gap-2"><Truck className="h-4 w-4 shrink-0 text-primary" /> Envio em até 3 dias</div>
-            <div className="flex gap-2"><Check className="h-4 w-4 shrink-0 text-primary" /> Troca em 7 dias</div>
+            <div className="flex gap-2"><Truck className="h-4 w-4 shrink-0 text-primary" /> Frete confirmado no WhatsApp</div>
+            <div className="flex gap-2"><Check className="h-4 w-4 shrink-0 text-primary" /> Pagamento confirmado no WhatsApp</div>
           </div>
         </div>
       </div>
