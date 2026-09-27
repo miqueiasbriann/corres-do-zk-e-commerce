@@ -1,155 +1,150 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, Instagram, Play, Sparkles } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import { ArrowRight, Instagram, MessageCircle, Play } from "lucide-react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { ZKChromeMark } from "@/components/site/ZKChromeMark";
+import { ZKMascot } from "@/components/site/ZKMascot";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
+import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
-      { name: "description", content: "Streetwear da CORRES DO ZK. Nascida na rua. Feita pro seu corre." },
-      { property: "og:title", content: "CORRES DO ZK — NASCIDA NA RUA. FEITA PRO SEU CORRE." },
-      { property: "og:description", content: "Nascida na rua. Feita pro seu corre." },
+      { title: "CORRES DO ZK — O CORRE NÃO PARA" },
+      { name: "description", content: "Streetwear CORRES DO ZK. O corre não para. O estilo acompanha." },
+      { property: "og:title", content: "CORRES DO ZK — O CORRE NÃO PARA" },
+      { property: "og:description", content: "O corre não para. O estilo acompanha." },
     ],
   }),
   component: Home,
 });
 
-const categories = [
-  { label: "Camisetas", kicker: "01 / CAMISETAS", state: "available" },
-  { label: "Moletons", kicker: "02 / MOLETONS", state: "available" },
-  { label: "Conjuntos", kicker: "03 / CONJUNTOS", state: "available" },
-  { label: "Calças", kicker: "04 / CALÇAS", state: "available" },
-  { label: "Boné", kicker: "05 / BONÉ", state: "available" },
-  { label: "Acessórios", kicker: "06 / ACESSÓRIOS", state: "soon" },
+const categoryMeta = [
+  { label: "Camisetas", position: "center 24%", state: "available" },
+  { label: "Moletons", position: "center 28%", state: "available" },
+  { label: "Conjuntos", position: "62% center", state: "available" },
+  { label: "Calças", position: "58% 72%", state: "available" },
+  { label: "Boné", position: "72% 18%", state: "available" },
+  { label: "Acessórios", position: "center 62%", state: "soon" },
 ] as const;
 
 function Home() {
-  const destaque = products.slice(0, 3);
+  const { content } = useSiteContent();
+  const radar = products.slice(0, 4);
+  const editorialParts = content.text.editorialTitle.split(" SUA ");
 
   return (
-    <div className="overflow-hidden">
-      <section className="zk-grain relative min-h-[72svh] sm:min-h-[calc(100svh-4.5rem)]">
-        <img src={heroImg} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="zk-hero-depth absolute inset-0 h-full w-full object-cover" />
+    <div className="overflow-hidden bg-background text-foreground">
+      <section className="zk-hero relative isolate min-h-[730px] overflow-hidden sm:min-h-[780px] lg:min-h-[calc(100svh-4.35rem)]">
+        <img src={content.images.hero} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="zk-hero-depth absolute inset-0 h-full w-full object-cover object-[62%_center] sm:object-center" />
+        <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(5,5,5,.98)_0%,rgba(5,5,5,.88)_34%,rgba(5,5,5,.30)_68%,rgba(5,5,5,.12)_100%)]" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-transparent to-black/25" />
+        <div className="absolute inset-0 z-[1] zk-grit-overlay" />
+
         <ZKChromeMark />
-        <div className="absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
-        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-background via-transparent to-black/30" />
+        <div className="absolute bottom-4 right-0 z-[4] hidden h-[42%] w-[34%] max-w-[430px] lg:block"><ZKMascot /></div>
 
-        <div className="relative z-[4] mx-auto flex min-h-[72svh max-w-7xl items-end px-5 pb-10 sm:min-h-[calc(100svh-4.5rem)] sm:px-6 sm:pb-16">
-          <div className="max-w-5xl">
-            <div className="flex items-center gap-3 text-primary">
-              <span className="zk-red-rule" />
-              <p className="zk-eyebrow text-primary">CORRES DO ZK / DROP 01</p>
+        <div className="relative z-[5] mx-auto flex min-h-[730px] max-w-[1440px] items-end px-5 pb-12 pt-24 sm:min-h-[780px] sm:px-6 sm:pb-16 lg:min-h-[calc(100svh-4.35rem)] lg:px-8 lg:pb-16">
+          <div className="max-w-3xl">
+            <img src={content.images.logo} alt="CORRES DO ZK" className="h-auto w-[230px] max-w-[62vw] object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,.55)] sm:w-[320px] lg:w-[410px]" />
+            <div className="mt-8 flex items-center gap-3">
+              <span className="h-px w-10 bg-primary" />
+              <p className="text-[9px] font-black uppercase tracking-[0.28em] text-white/60 sm:text-[10px]">{content.text.heroKicker}</p>
             </div>
-            <h1 className="zk-title mt-5 max-w-4xl text-[4rem] leading-[.86] sm:text-7xl lg:text-[8rem]">
-              Nascida na rua.
-              <br />
-              <span className="text-primary">Feita pro seu corre.</span>
-            </h1>
-            <p className="mt-6 max-w-lg text-sm leading-6 text-white/65 sm:text-base">
-              Streetwear autoral para acompanhar seu corre. Peças com presença e identidade.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="h-12 px-7 text-xs font-bold uppercase tracking-[0.16em]">
-                <Link to="/loja">Ver coleção <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <h1 className="zk-title mt-4 text-[3.45rem] leading-[.88] text-white sm:text-7xl lg:text-[6.9rem]">{content.text.heroTitle}</h1>
+            <p className="zk-hand mt-2 text-[2.25rem] leading-none text-primary sm:text-5xl lg:text-6xl">{content.text.heroSubtitle}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button asChild size="lg" className="h-13 rounded-none px-7 text-[11px] font-black uppercase tracking-[0.18em] shadow-[0_14px_35px_rgba(218,25,35,.22)]">
+                <Link to="/loja">{content.text.heroCta}<ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Link to="/sobre" className="zk-focus inline-flex h-12 items-center border border-white/20 px-6 text-xs font-bold uppercase tracking-[0.16em] text-white transition-colors hover:border-primary hover:text-primary">
-                Manifesto
-              </Link>
-            </div>
-            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/15 pt-5 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/45">
-              <span>Streetwear</span><span>Identidade própria</span><span>Feita pro seu corre</span>
+              <Link to="/sobre" className="zk-focus inline-flex h-13 items-center border border-white/20 bg-black/20 px-6 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition hover:border-white/50">A marca</Link>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-7 right-6 hidden items-center gap-2 text-[9px] font-bold uppercase tracking-[0.25em] text-white/45 lg:flex">
-          Scroll <ArrowDownRight className="h-3 w-3" />
-        </div>
+        <div className="absolute bottom-5 right-5 z-[5] h-36 w-36 lg:hidden"><ZKMascot /></div>
       </section>
 
-      <div className="overflow-hidden border-y border-primary/30 bg-primary py-3">
-        <div className="zk-marquee flex w-max gap-10 text-[10px] font-bold uppercase tracking-[0.28em] text-primary-foreground">
-          {Array.from({ length: 8 }).map((_, i) => <span key={i}>NASCIDA NA RUA. FEITA PRO SEU CORRE. • DROP LIMITADO • CORRES DO ZK •</span>)}
-        </div>
-      </div>
-
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
-        <div className="grid gap-8 md:grid-cols-[.75fr_1.25fr] md:items-end">
-          <div>
-            <p className="zk-eyebrow text-primary">Explore por categoria</p>
-            <h2 className="zk-title mt-3 text-5xl sm:text-6xl">A coleção</h2>
+      <section className="border-y border-white/10 bg-[#0a0a0a]">
+        <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="mb-8 flex items-center gap-4 sm:mb-10">
+            <h2 className="zk-title whitespace-nowrap text-4xl text-white sm:text-5xl">Escolha seu <span className="zk-hand text-primary">corre</span></h2>
+            <div className="h-px flex-1 bg-white/15" />
           </div>
-          <p className="max-w-md text-sm leading-6 text-muted-foreground md:justify-self-end">
-            Explore as categorias da marca e encontre as peças que já estão disponíveis.
-          </p>
-        </div>
-        <div className="mt-10 grid border-y border-border sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category, index) => (
-            category.state === "available" ? (
-              <Link key={category.label} to="/loja" search={{ categoria: category.label }} className="zk-focus group border-b border-border p-6 transition-colors hover:bg-card sm:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
-                <p className="text-[9px] font-bold tracking-[0.2em] text-primary">{category.kicker}</p>
-                <div className="mt-14 flex items-end justify-between gap-3">
-                  <h3 className="text-3xl">{category.label}</h3>
-                  <ArrowRight className="mb-1 h-5 w-5 transition-transform group-hover:translate-x-1" />
+
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-6">
+            {categoryMeta.map((category) => {
+              const image = content.images.categories[category.label] || content.images.hero;
+              const card = (
+                <div className="group relative aspect-[.72] overflow-hidden border border-white/12 bg-[#111]">
+                  <img src={image} alt="" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" style={{ objectPosition: category.position }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                    <div className="flex items-end justify-between gap-2">
+                      <div>
+                        <p className="text-[11px] font-black uppercase tracking-[0.05em] text-white sm:text-sm">{category.label}</p>
+                        {category.state === "soon" && <p className="mt-1 text-[8px] font-black uppercase tracking-[0.28em] text-white/60">Em breve</p>}
+                      </div>
+                      {category.state === "available" && <ArrowRight className="h-4 w-4 text-white/75 transition group-hover:translate-x-1 group-hover:text-primary" />}
+                    </div>
+                  </div>
                 </div>
-              </Link>
-            ) : (
-              <div key={category.label} className="border-b border-border p-6 opacity-45 sm:border-l lg:border-b-0 lg:border-l">
-                <p className="text-[9px] font-bold tracking-[0.2em]">{category.kicker}</p>
-                <div className="mt-14 flex items-end justify-between gap-3"><h3 className="text-3xl">{category.label}</h3><span className="text-[9px] font-bold uppercase tracking-[0.18em]">Em breve</span></div>
-              </div>
-            )
-          ))}
-        </div>
-      </section>
-
-      <section className="zk-grid border-y border-border/70 bg-card/25">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
-          <div className="flex items-end justify-between gap-6">
-            <div><p className="zk-eyebrow text-primary">Agora no corre</p><h2 className="zk-title mt-3 text-5xl sm:text-6xl">Lançamentos</h2></div>
-            <Link to="/loja" className="zk-focus hidden text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground sm:block">Ver tudo →</Link>
+              );
+              return category.state === "available" ? (
+                <Link key={category.label} to="/loja" search={{ categoria: category.label }} className="zk-focus block">{card}</Link>
+              ) : (
+                <div key={category.label} aria-label="Acessórios — em breve" className="opacity-75">{card}</div>
+              );
+            })}
           </div>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{destaque.map((p) => <ProductCard key={p.slug} product={p} />)}</div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
-        <div className="grid gap-12 md:grid-cols-[.8fr_1.2fr]">
+      <section className="bg-[#090909]">
+        <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+          <div className="mb-8 flex items-center gap-4 sm:mb-10">
+            <h2 className="zk-title whitespace-nowrap text-4xl text-white sm:text-5xl">No <span className="zk-hand text-primary">radar</span></h2>
+            <div className="h-px flex-1 bg-white/15" />
+            <Link to="/loja" className="zk-focus hidden text-[9px] font-black uppercase tracking-[0.2em] text-white/50 transition hover:text-white sm:block">Ver tudo →</Link>
+          </div>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:gap-x-4 lg:grid-cols-4 lg:gap-x-5">
+            {radar.map((product) => <ProductCard key={product.slug} product={product} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative isolate overflow-hidden border-y border-white/10 bg-black">
+        <div className="grid min-h-[430px] grid-cols-3 sm:min-h-[520px]">
+          <img src={content.images.products[products[1]?.slug] || products[1]?.image || content.images.hero} alt="Detalhe de camiseta CORRES DO ZK" loading="lazy" className="h-full w-full object-cover opacity-72" />
+          <img src={content.images.editorial} alt="Detalhe editorial CORRES DO ZK" loading="lazy" className="h-full w-full object-cover opacity-60" />
+          <img src={content.images.products[products[0]?.slug] || products[0]?.image || content.images.hero} alt="Detalhe de moletom CORRES DO ZK" loading="lazy" className="h-full w-full object-cover opacity-72" />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.66)_48%,rgba(0,0,0,.28))]" />
+        <div className="absolute inset-0 flex items-center justify-center px-5 text-center">
           <div>
-            <p className="zk-eyebrow text-primary">O manifesto</p>
-            <h2 className="zk-title mt-4 max-w-md text-5xl sm:text-6xl">Vestir o processo.</h2>
-          </div>
-          <div className="max-w-2xl space-y-6 text-sm leading-7 text-muted-foreground">
-            <p className="text-lg leading-8 text-foreground/80">Nascida na rua. Feita pro seu corre. A CORRES DO ZK transforma rotina, disciplina e identidade em roupa para usar todos os dias.</p>
-            <p>Uma identidade própria para acompanhar o seu corre.</p>
-            <Link to="/sobre" className="zk-focus inline-flex border-b border-primary pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Conheça a marca</Link>
+            <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/60">Detalhes / textura / identidade</p>
+            <h2 className="zk-title mt-4 text-5xl leading-[.9] text-white sm:text-7xl">{editorialParts[0]}</h2>
+            {editorialParts[1] ? <p className="zk-hand mt-2 text-4xl leading-none text-primary sm:text-6xl">SUA {editorialParts[1]}</p> : null}
+            <Link to="/loja" className="zk-focus mt-7 inline-flex items-center border-b border-white/45 pb-2 text-[9px] font-black uppercase tracking-[0.2em] text-white transition hover:border-primary hover:text-primary">Explorar coleção <ArrowRight className="ml-2 h-3.5 w-3.5" /></Link>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-24">
-          <div className="grid gap-5 lg:grid-cols-[1.4fr_.6fr]">
-            <div className="zk-surface relative overflow-hidden p-8 sm:p-12">
-              <div className="absolute right-0 top-0 h-28 w-28 bg-primary/10" />
-              <Instagram className="h-5 w-5 text-primary" />
-              <p className="zk-eyebrow mt-8">Siga o movimento</p>
-              <h2 className="zk-title mt-3 text-4xl sm:text-5xl">@corresdozk</h2>
-              <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">Bastidores, drops e o corre diário. Encontre a marca no Instagram e TikTok.</p>
-              <div className="mt-8 flex gap-3">
-                <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" className="zk-focus inline-flex h-11 items-center gap-2 border border-border px-4 text-[10px] font-bold uppercase tracking-[0.16em] hover:border-primary"><Instagram className="h-4 w-4" /> Instagram</a>
-                <a href="https://www.tiktok.com/@corresdozk" target="_blank" rel="noreferrer" className="zk-focus inline-flex h-11 items-center gap-2 border border-border px-4 text-[10px] font-bold uppercase tracking-[0.16em] hover:border-primary"><Play className="h-4 w-4" /> TikTok</a>
-              </div>
+      <section className="bg-[#0a0a0a]">
+        <div className="mx-auto grid max-w-[1440px] gap-5 px-4 py-12 sm:px-6 md:grid-cols-[1.25fr_.75fr] lg:px-8 lg:py-16">
+          <div className="border border-white/10 bg-white/[0.025] p-7 sm:p-9">
+            <Instagram className="h-5 w-5 text-primary" />
+            <p className="zk-eyebrow mt-7 text-white/45">Acompanhe o corre</p>
+            <h2 className="zk-title mt-3 text-4xl text-white sm:text-5xl">@corresdozk</h2>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" className="zk-focus inline-flex h-11 items-center gap-2 border border-white/15 px-4 text-[9px] font-black uppercase tracking-[0.18em] text-white hover:border-primary"><Instagram className="h-4 w-4" /> Instagram</a>
+              <a href="https://www.tiktok.com/@corresdozk" target="_blank" rel="noreferrer" className="zk-focus inline-flex h-11 items-center gap-2 border border-white/15 px-4 text-[9px] font-black uppercase tracking-[0.18em] text-white hover:border-primary"><Play className="h-4 w-4" /> TikTok</a>
             </div>
-            <div className="border border-border bg-primary p-8 text-primary-foreground sm:p-10">
-              <Sparkles className="h-5 w-5" />
-              <p className="zk-eyebrow mt-8 text-primary-foreground/70">CORRES DO ZK</p>
-              <p className="zk-title mt-3 text-4xl">Feita pro seu corre.</p>
-              <p className="mt-5 text-sm leading-6 text-primary-foreground/75">Frete e pagamento são confirmados pelo WhatsApp.</p>
-            </div>
+          </div>
+          <div className="bg-primary p-7 text-white sm:p-9">
+            <MessageCircle className="h-5 w-5" />
+            <p className="zk-eyebrow mt-7 text-white/65">Finalização</p>
+            <p className="zk-title mt-3 text-4xl">Pedido pelo WhatsApp.</p>
+            <p className="mt-4 text-sm leading-6 text-white/75">Frete e pagamento são confirmados na conversa.</p>
           </div>
         </div>
       </section>
