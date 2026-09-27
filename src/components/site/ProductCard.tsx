@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: Product }) {
       className="group zk-focus block rounded-sm"
       aria-label={`Ver ${product.name}`}
     >
-      <div className="zk-surface zk-image-frame zk-grain overflow-hidden rounded-sm">
+      <div className="zk-card-3d zk-surface zk-image-frame zk-grain overflow-hidden rounded-sm">
         <div className="relative">
           <img src={product.image} alt={product.name} loading="lazy" width={1008} height={1200} className="aspect-[5/6] w-full object-cover" />
           <span className="absolute left-3 top-3 z-10 border border-white/15 bg-black/65 px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
