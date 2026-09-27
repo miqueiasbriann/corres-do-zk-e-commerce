@@ -7,6 +7,10 @@ export const Route = createFileRoute("/sobre")({
     meta: [
       { title: "A Marca — CORRES DO ZK" },
       { name: "description", content: "O corre não para. O estilo acompanha." },
+      { property: "og:title", content: "A Marca — CORRES DO ZK" },
+      { property: "og:description", content: "O corre não para. O estilo acompanha." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Sobre,

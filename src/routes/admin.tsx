@@ -12,6 +12,10 @@ export const Route = createFileRoute("/admin")({
     meta: [
       { title: "Painel — CORRES DO ZK" },
       { name: "description", content: "Painel de conteúdo visual da CORRES DO ZK." },
+      { property: "og:title", content: "Painel — CORRES DO ZK" },
+      { property: "og:description", content: "Painel de conteúdo visual da CORRES DO ZK." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),

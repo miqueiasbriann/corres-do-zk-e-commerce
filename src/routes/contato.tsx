@@ -11,6 +11,10 @@ export const Route = createFileRoute("/contato")({
     meta: [
       { title: "Contato — CORRES DO ZK" },
       { name: "description", content: "Fale com a CORRES DO ZK pelo WhatsApp ou redes sociais." },
+      { property: "og:title", content: "Contato — CORRES DO ZK" },
+      { property: "og:description", content: "Fale com a CORRES DO ZK pelo WhatsApp ou redes sociais." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Contato,
