@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle, Tag } from "lucide-react";
-import { useMemo, useState, type FormEvent } from "react";
+import { useMemo, useState, type FocusEvent, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -82,7 +82,7 @@ function Checkout() {
     setCouponMessage(`Cupom ${coupon.code} aplicado.`);
   }
 
-  function handleBlur(event: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
+  function handleBlur(event: FocusEvent<HTMLInputElement | HTMLSelectElement>) {
     const name = event.currentTarget.name as FieldName;
     if (!name) return;
     const message = validateField(name, event.currentTarget.value);
