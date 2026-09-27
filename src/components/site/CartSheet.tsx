@@ -34,13 +34,16 @@ export function CartSheet({ open, onOpenChange }: { open: boolean; onOpenChange:
             const reachedLimit = item.qty >= item.maxQty;
             return (
               <div key={`${item.slug}-${item.size}-${item.color}`} className="flex gap-3 border-b border-white/10 pb-4">
-                <img src={item.image} alt={item.name} loading="lazy" className="h-24 w-20 shrink-0 object-cover" />
+                <img src={item.image} alt={item.name} loading="lazy" className="h-20 w-16 shrink-0 object-cover" />
                 <div className="min-w-0 flex-1">
                   <p className="line-clamp-2 text-sm font-semibold">{item.name}</p>
-                  <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.15em] text-white/45">
-                    Tam. {item.size} · {item.color}
-                  </p>
-                  <div className="mt-3 flex items-center gap-1.5">
+                  <div className="mt-1 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/45">
+                      Tam. {item.size} · {item.color}
+                    </p>
+                    <p className="text-xs font-semibold">{formatBRL(item.price * item.qty)}</p>
+                  </div>
+                  <div className="mt-3 flex min-w-0 items-center gap-1.5">
                     <button
                       type="button"
                       aria-label={`Diminuir quantidade de ${item.name}`}
@@ -70,7 +73,6 @@ export function CartSheet({ open, onOpenChange }: { open: boolean; onOpenChange:
                   </div>
                   {reachedLimit && <p className="mt-2 text-[9px] uppercase tracking-[0.12em] text-primary">Limite desta variação atingido</p>}
                 </div>
-                <p className="whitespace-nowrap text-xs font-semibold sm:text-sm">{formatBRL(item.price * item.qty)}</p>
               </div>
             );
           })}
