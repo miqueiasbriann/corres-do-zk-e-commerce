@@ -30,7 +30,7 @@ function Loja() {
     filtro === "Tudo" ? products : products.filter((p) => p.category === filtro);
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-16">
+    <div className="mx-auto max-w-7xl px-5 py-14 sm:py-20">
       <p className="zk-eyebrow">Catálogo</p>
       <h1 className="zk-title mt-3 text-5xl sm:text-6xl">Loja</h1>
 
@@ -39,10 +39,10 @@ function Loja() {
           <button
             key={f}
             onClick={() => setFiltro(f)}
-            className={`border px-4 py-2 text-xs uppercase tracking-[0.2em] transition-colors ${
+            className={`zk-focus rounded-sm border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition-all ${
               filtro === f
                 ? "border-primary bg-primary text-primary-foreground"
-                : "border-border text-muted-foreground hover:text-foreground"
+                : "border-border bg-card/40 text-muted-foreground hover:border-primary/45 hover:bg-accent hover:text-foreground"
             }`}
           >
             {f}
@@ -50,7 +50,7 @@ function Loja() {
         ))}
       </div>
 
-      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {lista.map((p) => (
           <ProductCard key={p.slug} product={p} />
         ))}
