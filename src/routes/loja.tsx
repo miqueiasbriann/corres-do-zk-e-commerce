@@ -6,17 +6,8 @@ import { products } from "@/data/products";
 export const Route = createFileRoute("/loja")({
   head: () => ({
     meta: [
-      { title: "Loja — CORRES DO ZK" },
-      {
-        name: "description",
-        content:
-          "Moletons, camisetas e acessórios da CORRES DO ZK. Drops limitados com envio para todo o Brasil.",
-      },
-      { property: "og:title", content: "Loja — CORRES DO ZK" },
-      {
-        property: "og:description",
-        content: "Todas as peças dos drops atuais da CORRES DO ZK.",
-      },
+      { title: "Coleção — CORRES DO ZK" },
+      { name: "description", content: "Coleção CORRES DO ZK: streetwear premium em tiragem limitada." },
     ],
   }),
   component: Loja,
@@ -26,27 +17,30 @@ const filtros = ["Tudo", "Moletons", "Camisetas", "Acessórios"] as const;
 
 function Loja() {
   const [filtro, setFiltro] = useState<(typeof filtros)[number]>("Tudo");
-  const lista =
-    filtro === "Tudo" ? products : products.filter((p) => p.category === filtro);
+  const lista = filtro === "Tudo" ? products : products.filter((p) => p.category === filtro);
 
   return (
-    <div className="zk-grid min-h-[70vh]">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-20">
-        <div className="flex flex-col gap-8 border-b border-border/70 pb-10 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="zk-eyebrow text-primary">Catálogo / Drop atual</p>
-            <h1 className="zk-title mt-3 text-6xl sm:text-7xl">Loja</h1>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-muted-foreground">
-              Peças pensadas para durar, feitas em pequenas quantidades e
-              prontas para acompanhar o corre.
-            </p>
+    <div className="min-h-[70vh]">
+      <section className="border-b border-border bg-card/35">
+        <div className="mx-auto max-w-7xl px-5 pb-14 pt-16 sm:px-6 sm:pb-20 sm:pt-20">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
+              <p className="zk-eyebrow text-primary">Drop atual / 01</p>
+              <h1 className="zk-title mt-3 text-7xl sm:text-8xl">Coleção</h1>
+              <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
+                Não é sorte. É processo. Peças de presença, produzidas em pequenas tiragens para quem vive o corre.
+              </p>
+            </div>
+            <div className="border-l-2 border-primary pl-5">
+              <p className="zk-title text-4xl">{String(lista.length).padStart(2, "0")}</p>
+              <p className="zk-eyebrow mt-1">peças na seleção</p>
+            </div>
           </div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {lista.length} {lista.length === 1 ? "peça" : "peças"}
-          </p>
         </div>
+      </section>
 
-        <div className="mt-8 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Filtrar produtos">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6">
+        <div className="flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Filtrar coleção">
           {filtros.map((f) => (
             <button
               key={f}
@@ -54,29 +48,21 @@ function Loja() {
               role="tab"
               aria-selected={filtro === f}
               onClick={() => setFiltro(f)}
-              className={`zk-focus shrink-0 rounded-full border px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all ${
-                filtro === f
-                  ? "border-primary bg-primary text-primary-foreground shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
-                  : "border-border bg-card/60 text-muted-foreground hover:border-primary/45 hover:bg-accent hover:text-foreground"
-              }`}
+              className={`zk-focus shrink-0 border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.18em] transition-all ${filtro === f ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}
             >
               {f}
             </button>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {lista.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
+        <div className="mt-8 grid gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {lista.map((p) => <ProductCard key={p.slug} product={p} />)}
         </div>
 
         {lista.length === 0 && (
-          <div className="mt-16 border border-dashed border-border p-10 text-center">
-            <p className="zk-eyebrow">Sem peças nesta seleção</p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Novos drops em breve.
-            </p>
+          <div className="mt-16 border border-dashed border-border p-12 text-center">
+            <p className="zk-eyebrow text-primary">Em breve</p>
+            <p className="mt-3 text-sm text-muted-foreground">Essa categoria entra no próximo drop.</p>
           </div>
         )}
       </div>
