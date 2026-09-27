@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as LojaRouteImport } from './routes/loja'
 import { Route as SobreRouteImport } from './routes/sobre'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -50,6 +56,7 @@ const ProdutoSlugRoute = ProdutoSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/contato': typeof ContatoRoute
   '/loja': typeof LojaRoute
   '/sobre': typeof SobreRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/contato': typeof ContatoRoute
   '/loja': typeof LojaRoute
   '/sobre': typeof SobreRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/contato': typeof ContatoRoute
   '/loja': typeof LojaRoute
   '/sobre': typeof SobreRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/contato' | '/loja' | '/sobre' | '/produto/$slug'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/checkout'
+    | '/contato'
+    | '/loja'
+    | '/sobre'
+    | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/contato' | '/loja' | '/sobre' | '/produto/$slug'
+  to:
+    | '/'
+    | '/admin'
+    | '/checkout'
+    | '/contato'
+    | '/loja'
+    | '/sobre'
+    | '/produto/$slug'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/checkout'
     | '/contato'
     | '/loja'
     | '/sobre'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContatoRoute: typeof ContatoRoute
   LojaRoute: typeof LojaRoute
   SobreRoute: typeof SobreRoute
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -146,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  CheckoutRoute: CheckoutRoute,
   ContatoRoute: ContatoRoute,
   LojaRoute: LojaRoute,
   SobreRoute: SobreRoute,

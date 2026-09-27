@@ -13,12 +13,12 @@ const priceOptions = [
 ] as const;
 
 export const Route = createFileRoute("/loja")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    categoria:
-      typeof search.categoria === "string" && categorias.includes(search.categoria as (typeof categorias)[number])
-        ? (search.categoria as (typeof categorias)[number])
-        : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { categoria?: (typeof categorias)[number] } => {
+    const raw = search["categoria"];
+    return typeof raw === "string" && categorias.includes(raw as (typeof categorias)[number])
+      ? { categoria: raw as (typeof categorias)[number] }
+      : {};
+  },
   head: () => ({
     meta: [
       { title: "Coleção — CORRES DO ZK" },

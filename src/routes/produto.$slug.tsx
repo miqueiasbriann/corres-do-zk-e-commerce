@@ -60,7 +60,7 @@ function Produto() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [size, setSize] = useState<string | null>(null);
-  const [color, setColor] = useState<string | null>(product.colors.length === 1 ? product.colors[0] : null);
+  const [color, setColor] = useState<string | null>(product.colors.length === 1 ? (product.colors[0] ?? null) : null);
   const [zoomOpen, setZoomOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const touchStart = useRef<number | null>(null);
