@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Instagram, MessageCircle, Play } from "lucide-react";
 import { ProductCard } from "@/components/site/ProductCard";
-import { ZKChromeMark } from "@/components/site/ZKChromeMark";
 import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { useSiteContent } from "@/lib/site-content";
@@ -13,6 +12,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Streetwear CORRES DO ZK. O corre não para. O estilo acompanha." },
       { property: "og:title", content: "CORRES DO ZK — O CORRE NÃO PARA" },
       { property: "og:description", content: "O corre não para. O estilo acompanha." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -31,73 +32,47 @@ function Home() {
   const { content } = useSiteContent();
   const radar = products.slice(0, 4);
   const editorialParts = content.text.editorialTitle.split(" SUA ");
-  const productImage = (index: number) => {
-    const product = products[index];
-    if (!product) return content.images.hero;
-    return content.images.products[product.slug]?.[0] || product.image;
-  };
 
   return (
     <div className="bg-background text-foreground">
-      <section className="zk-hero relative isolate min-h-[690px] overflow-hidden sm:min-h-[780px] lg:min-h-[calc(100svh-4.35rem)]">
+      <section className="zk-hero relative isolate overflow-hidden">
         <img
           src={content.images.heroMobile || content.images.hero}
           alt="Campanha CORRES DO ZK"
-          width={1008}
-          height={1200}
+          width={1672}
+          height={941}
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-[61%_center] sm:hidden"
+          className="zk-hero-photo absolute inset-0 h-full w-full object-cover sm:hidden"
         />
         <img
           src={content.images.hero}
           alt=""
           aria-hidden="true"
-          width={1600}
-          height={1008}
+          width={1672}
+          height={941}
           fetchPriority="high"
-          className="zk-hero-depth absolute inset-0 hidden h-full w-full object-cover object-center sm:block"
+          className="zk-hero-photo absolute inset-0 hidden h-full w-full object-cover sm:block"
         />
 
-        <div className="absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(4,4,4,.10)_0%,rgba(4,4,4,.08)_32%,rgba(4,4,4,.42)_66%,rgba(4,4,4,.86)_100%)] sm:bg-[linear-gradient(90deg,rgba(5,5,5,.78)_0%,rgba(5,5,5,.56)_34%,rgba(5,5,5,.12)_68%,rgba(5,5,5,.03)_100%)]" />
-        <div className="absolute inset-0 z-[1] zk-grit-overlay" />
-
-        <ZKChromeMark />
+        <div className="zk-hero-shade absolute inset-0 z-[1]" />
 
         {content.images.mascot && (
-          <>
-            <img
-              src={content.images.mascot}
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute right-[-1.1rem] top-[27%] z-[3] h-auto w-[46vw] max-w-[180px] object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,.52)] sm:hidden"
-            />
-            <img
-              src={content.images.mascot}
-              alt=""
-              aria-hidden="true"
-              className="pointer-events-none absolute bottom-3 right-[2%] z-[3] hidden h-auto w-[23vw] max-w-[300px] object-contain drop-shadow-[0_24px_26px_rgba(0,0,0,.55)] lg:block"
-            />
-          </>
+          <img src={content.images.mascot} alt="" aria-hidden="true" className="zk-hero-mascot pointer-events-none absolute z-[3] h-auto object-contain" />
         )}
 
-        <div className="relative z-[5] mx-auto flex min-h-[690px] max-w-[1440px] items-end px-4 pb-[max(2.25rem,env(safe-area-inset-bottom))] pt-24 sm:min-h-[780px] sm:px-6 sm:pb-16 lg:min-h-[calc(100svh-4.35rem)] lg:px-8">
-          <div className="min-w-0 max-w-3xl">
+        <div className="zk-hero-inner relative z-[2] mx-auto flex max-w-[1440px] items-center px-4 sm:px-6 lg:px-8">
+          <div className="zk-hero-copy min-w-0">
             <img
               src={content.images.logo}
               alt="CORRES DO ZK"
-              className="h-auto w-[min(72vw,270px)] object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,.55)] sm:w-[330px] lg:w-[410px]"
+              className="h-auto w-[min(75vw,310px)] object-contain sm:w-[360px] lg:w-[min(42vw,550px)]"
             />
-            <div className="mt-6 flex max-w-full items-center gap-3 sm:mt-8">
-              <span className="h-px w-8 shrink-0 bg-primary sm:w-10" />
-              <p className="truncate text-[8px] font-black uppercase tracking-[0.22em] text-white/72 sm:text-[10px] sm:tracking-[0.28em]">{content.text.heroKicker}</p>
-            </div>
-            <h1 className="zk-title mt-4 max-w-[8ch] break-words text-[clamp(2.8rem,13.5vw,3.65rem)] leading-[.88] text-white sm:max-w-none sm:text-7xl lg:text-[6.9rem]">{content.text.heroTitle}</h1>
-            <p className="zk-hand mt-2 max-w-[12ch] text-[clamp(1.9rem,9vw,2.6rem)] leading-[1.02] text-primary sm:max-w-none sm:text-5xl lg:text-6xl">{content.text.heroSubtitle}</p>
+            <h1 className="zk-title mt-6 max-w-[9ch] text-[2.85rem] leading-[.94] text-foreground sm:text-6xl lg:text-[5.5rem]">{content.text.heroTitle}</h1>
+            <p className="mt-3 text-base font-black uppercase leading-tight text-foreground sm:text-xl lg:text-2xl">{content.text.heroSubtitle}</p>
             <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-8">
               <Button asChild size="lg" className="h-12 min-w-[164px] rounded-none px-6 text-[10px] font-black uppercase tracking-[0.16em] shadow-[0_14px_35px_rgba(218,25,35,.22)] sm:h-13 sm:px-7 sm:text-[11px]">
                 <Link to="/loja">{content.text.heroCta}<ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Link to="/sobre" className="zk-focus inline-flex h-12 min-w-[118px] items-center justify-center border border-white/24 bg-black/18 px-5 text-[10px] font-bold uppercase tracking-[0.16em] text-white transition hover:border-white/50 sm:h-13 sm:px-6">A marca</Link>
             </div>
           </div>
         </div>
@@ -151,19 +126,13 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden border-y border-white/10 bg-black">
-        <div className="grid min-h-[390px] grid-cols-3 sm:min-h-[520px]">
-          <img src={productImage(1)} alt="Detalhe de camiseta CORRES DO ZK" loading="lazy" className="h-full min-w-0 w-full object-cover opacity-72" />
-          <img src={content.images.editorial} alt="Detalhe editorial CORRES DO ZK" loading="lazy" className="h-full min-w-0 w-full object-cover opacity-60" />
-          <img src={productImage(0)} alt="Detalhe de moletom CORRES DO ZK" loading="lazy" className="h-full min-w-0 w-full object-cover opacity-72" />
-        </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.22),rgba(0,0,0,.58)_48%,rgba(0,0,0,.22))]" />
+      <section className="zk-editorial relative isolate overflow-hidden border-y border-border bg-background">
+        <img src={content.images.editorial} alt="Tecido preto com coroa bordada vermelha, corrente e etiqueta CORRES DO ZK" loading="lazy" className="absolute inset-0 h-full w-full object-cover object-center" />
+        <div className="zk-editorial-shade absolute inset-0" />
         <div className="absolute inset-0 flex items-center justify-center px-4 text-center sm:px-5">
           <div className="min-w-0">
-            <p className="text-[8px] font-black uppercase tracking-[0.24em] text-white/60 sm:text-[9px] sm:tracking-[0.3em]">Detalhes / textura / identidade</p>
-            <h2 className="zk-title mt-4 text-[2.9rem] leading-[.9] text-white sm:text-7xl">{editorialParts[0]}</h2>
-            {editorialParts[1] ? <p className="zk-hand mt-2 text-[2.2rem] leading-none text-primary sm:text-6xl">SUA {editorialParts[1]}</p> : null}
-            <Link to="/loja" className="zk-focus mt-7 inline-flex min-h-11 items-center border-b border-white/45 pb-1 text-[9px] font-black uppercase tracking-[0.18em] text-white transition hover:border-primary hover:text-primary">Explorar coleção <ArrowRight className="ml-2 h-3.5 w-3.5" /></Link>
+            <h2 className="zk-title text-[2.7rem] leading-[.94] text-foreground sm:text-6xl">{editorialParts[0]}</h2>
+            {editorialParts[1] ? <p className="zk-hand mt-2 text-[2rem] leading-none text-primary sm:text-5xl">SUA {editorialParts[1]}</p> : null}
           </div>
         </div>
       </section>

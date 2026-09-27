@@ -47,7 +47,7 @@ export function Header() {
               <img
                 src={content.images.logo}
                 alt="CORRES DO ZK"
-                className="h-auto max-h-12 w-auto max-w-[142px] object-contain sm:max-w-[170px]"
+                className="h-auto max-h-14 w-auto max-w-[154px] object-contain sm:max-w-[190px]"
               />
             </Link>
 

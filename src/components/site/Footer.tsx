@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="border-t border-white/10 bg-[#080808] text-white">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 sm:px-6 lg:grid-cols-[1.2fr_.8fr_.8fr] lg:px-8 lg:py-16">
         <div>
-          <img src={content.images.logo} alt="CORRES DO ZK" className="h-16 w-auto max-w-[220px] object-contain" />
+          <img src={content.images.logo} alt="CORRES DO ZK" className="h-auto w-[220px] max-w-full object-contain sm:w-[250px]" />
           <p className="mt-5 max-w-sm text-sm leading-6 text-white/55">O corre não para. O estilo acompanha.</p>
           <div className="mt-6 flex gap-2">
             <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" aria-label="Instagram da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-white/15 transition hover:border-primary hover:text-primary"><Instagram className="h-4 w-4" /></a>
