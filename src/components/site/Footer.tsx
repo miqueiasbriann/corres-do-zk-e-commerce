@@ -6,8 +6,8 @@ export function Footer() {
     <footer className="border-t border-border bg-card/35">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <p className="zk-title text-3xl">CORRES <span className="text-primary">DO ZK</span></p>
-          <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">Streetwear premium feito na quebrada. <span className="text-foreground">Não é sorte. É processo.</span></p>
+          <p className="zk-title text-3xl">CORRES DO <span className="text-primary">ZK</span></p>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">Streetwear premium feito na quebrada. <span className="text-foreground">Nascida na rua. Feita pro seu corre.</span></p>
           <div className="mt-6 flex gap-2">
             <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" aria-label="Instagram da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-border hover:border-primary"><Instagram className="h-4 w-4" /></a>
             <a href="https://www.tiktok.com/@corresdozk" target="_blank" rel="noreferrer" aria-label="TikTok da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-border hover:border-primary"><Play className="h-4 w-4" /></a>
