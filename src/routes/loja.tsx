@@ -1,5 +1,4 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { products } from "@/data/products";
 
@@ -26,7 +25,7 @@ const filtros = ["Tudo", "Camisetas", "Moletons", "Conjuntos", "Calças", "Boné
 function Loja() {
   const navigate = useNavigate({ from: "/loja" });
   const { categoria } = Route.useSearch();
-  const [filtro, setFiltro] = useState<(typeof filtros)[number]>(categoria ?? "Tudo");
+  const filtro = categoria ?? "Tudo";
   const lista = filtro === "Tudo" ? products : products.filter((p) => p.category === filtro);
 
   return (
@@ -57,7 +56,7 @@ function Loja() {
               type="button"
               role="tab"
               aria-selected={filtro === f}
-              onClick={() => { setFiltro(f); navigate({ search: f === "Tudo" ? {} : { categoria: f } }); }}
+              onClick={() => navigate({ search: f === "Tudo" ? {} : { categoria: f } })}
               className={`zk-focus shrink-0 border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.18em] transition-all ${filtro === f ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}
             >
               {f}
