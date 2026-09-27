@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
           <p className="zk-title text-3xl">CORRES DO <span className="text-primary">ZK</span></p>
-          <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">Streetwear premium feito na quebrada. <span className="text-foreground">Nascida na rua. Feita pro seu corre.</span></p>
+          <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">Nascida na rua. Feita pro seu corre.</p>
           <div className="mt-6 flex gap-2">
             <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" aria-label="Instagram da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-border hover:border-primary"><Instagram className="h-4 w-4" /></a>
             <a href="https://www.tiktok.com/@corresdozk" target="_blank" rel="noreferrer" aria-label="TikTok da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-border hover:border-primary"><Play className="h-4 w-4" /></a>
@@ -24,11 +24,11 @@ export function Footer() {
         <div>
           <p className="zk-eyebrow">Serviço</p>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            <li>Trocas em até 7 dias</li><li>Envio para todo o Brasil</li><li>Frete grátis acima de R$ 399</li>
+            <li>Atendimento via WhatsApp</li><li>Frete confirmado pelo WhatsApp</li><li>Pagamento confirmado pelo WhatsApp</li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-5 text-center text-[10px] uppercase tracking-[0.16em] text-muted-foreground">© {new Date().getFullYear()} CORRES DO ZK. Todos os direitos reservados.</div>
+      <div className="border-t border-border py-5 text-center text-[10px] uppercase tracking-[0.16em] text-muted-foreground">CORRES DO ZK. Todos os direitos reservados.</div>
     </footer>
   );
 }
