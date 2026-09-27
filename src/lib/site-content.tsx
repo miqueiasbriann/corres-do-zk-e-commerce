@@ -9,7 +9,7 @@ import {
 import hero from "@/assets/hero.jpg";
 import hoodie from "@/assets/p-hoodie.jpg";
 import tee from "@/assets/p-tee.jpg";
-import logo from "@/assets/logo-zk.svg";
+import logo from "@/assets/logo-zk-original.webp";\nimport mascot from "@/assets/mascot-zk-original.webp";
 import { products } from "@/data/products";
 
 export type SiteTextKey =
@@ -46,7 +46,7 @@ export const defaultSiteContent: SiteContent = {
     logo,
     hero,
     heroMobile: hero,
-    mascot: "",
+    mascot,
     editorial: hoodie,
     categories: {
       Camisetas: tee,
