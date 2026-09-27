@@ -13,7 +13,6 @@ const nav = [
   { to: "/loja", label: "Loja" },
   { to: "/sobre", label: "A Marca" },
   { to: "/contato", label: "Contato" },
-  { to: "/admin", label: "Admin" },
 ] as const;
 
 export function Header() {
@@ -21,10 +20,10 @@ export function Header() {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 shadow-[0_8px_30px_rgba(0,0,0,0.16)] backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
         <div className="flex items-center gap-8">
-          <Link to="/" className="zk-title text-xl tracking-tight">
+          <Link to="/" className="zk-title zk-focus rounded-sm text-xl tracking-tight">
             CORRES <span className="text-primary">DO ZK</span>
           </Link>
           <nav className="hidden items-center gap-6 md:flex">
@@ -32,8 +31,8 @@ export function Header() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-                activeProps={{ className: "text-foreground" }}
+                className="zk-focus rounded-sm py-2 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "zk-focus rounded-sm py-2 text-xs uppercase tracking-[0.2em] text-foreground" }}
               >
                 {item.label}
               </Link>
@@ -45,7 +44,7 @@ export function Header() {
           <button
             onClick={() => setCartOpen(true)}
             aria-label="Abrir sacola"
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border transition-colors hover:bg-accent"
+            className="zk-focus relative inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card/60 transition-colors hover:border-primary/50 hover:bg-accent"
           >
             <ShoppingBag className="h-4 w-4" />
             {count > 0 && (
@@ -58,11 +57,11 @@ export function Header() {
           <Sheet>
             <SheetTrigger
               aria-label="Abrir menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border md:hidden"
+              className="zk-focus inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-card/60 transition-colors hover:border-primary/50 md:hidden"
             >
               <Menu className="h-4 w-4" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-72">
+            <SheetContent side="right" className="w-[min(22rem,88vw)] border-l-border bg-background/95 backdrop-blur-xl">
               <nav className="mt-10 flex flex-col gap-5 px-5">
                 {nav.map((item) => (
                   <Link
