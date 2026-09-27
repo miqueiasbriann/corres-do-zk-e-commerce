@@ -35,10 +35,10 @@ function Home() {
       <section className="zk-grain relative min-h-[72svh] sm:min-h-[calc(100svh-4.5rem)]">
         <img src={heroImg} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="zk-hero-depth absolute inset-0 h-full w-full object-cover" />
         <ZKChromeMark />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
+        <div className="absolute inset-0 z-[2] bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
+        <div className="absolute inset-0 z-[2] bg-gradient-to-t from-background via-transparent to-black/30" />
 
-        <div className="relative mx-auto flex min-h-[72svh] max-w-7xl items-end px-5 pb-10 sm:min-h-[calc(100svh-4.5rem)] sm:px-6 sm:pb-16">
+        <div className="relative z-[4] mx-auto flex min-h-[72svh max-w-7xl items-end px-5 pb-10 sm:min-h-[calc(100svh-4.5rem)] sm:px-6 sm:pb-16">
           <div className="max-w-5xl">
             <div className="flex items-center gap-3 text-primary">
               <span className="zk-red-rule" />
