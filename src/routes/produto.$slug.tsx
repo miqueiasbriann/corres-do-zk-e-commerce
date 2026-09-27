@@ -218,7 +218,11 @@ function Produto() {
 
             {size && color && (
               <p className={`mt-3 text-[9px] font-bold uppercase tracking-[0.13em] ${selectedStock > 0 ? "text-white/45" : "text-primary"}`}>
-                {selectedStock > 0 ? `${selectedStock} disponível(is) nesta combinação` : "Combinação indisponível"}
+                {selectedStock > 0
+                  ? product.isDemo
+                    ? `Limite demonstrativo desta combinação: ${selectedStock}`
+                    : `${selectedStock} disponível(is) nesta combinação`
+                  : "Combinação indisponível"}
               </p>
             )}
 
