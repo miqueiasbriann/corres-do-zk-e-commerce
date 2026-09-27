@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, Instagram, Play, Sparkles } from "lucide-react";
+import { ArrowDownRight, ArrowRight, BadgeCheck, Instagram, MessageCircle, Play, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import { ProductCard } from "@/components/site/ProductCard";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ function Home() {
 
   return (
     <div className="overflow-hidden">
-      <section className="zk-grain relative min-h-[calc(100svh-4.5rem)]">
+      <section className="zk-grain relative min-h-[72svh] sm:min-h-[calc(100svh-4.5rem)]">
         <img src={heroImg} alt="Campanha CORRES DO ZK" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.72)_42%,rgba(8,8,8,.12)_82%)]" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30" />
@@ -69,9 +69,25 @@ function Home() {
 
       <div className="overflow-hidden border-y border-primary/30 bg-primary py-3">
         <div className="zk-marquee flex w-max gap-10 text-[10px] font-bold uppercase tracking-[0.28em] text-primary-foreground">
-          {Array.from({ length: 8 }).map((_, i) => <span key={i}>NÃO É SORTE. É PROCESSO. • DROP LIMITADO • CORRES DO ZK •</span>)}
+          {Array.from({ length: 8 }).map((_, i) => <span key={i}>NASCIDA NA RUA. FEITA PRO SEU CORRE. • DROP LIMITADO • CORRES DO ZK •</span>)}
         </div>
       </div>
+
+      <section className="border-b border-border bg-background">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 sm:grid-cols-4">
+          {[
+            [Truck, "Envio para todo o Brasil"],
+            [MessageCircle, "Atendimento via WhatsApp"],
+            [BadgeCheck, "Produtos de qualidade"],
+            [ShieldCheck, "Pagamento seguro"],
+          ].map(([Icon, label]) => (
+            <div key={label as string} className="flex items-center gap-3 border-b border-border p-4 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 sm:px-5">
+              <Icon className="h-4 w-4 shrink-0 text-primary" />
+              <span className="text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-muted-foreground">{label as string}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-6 sm:py-28">
         <div className="grid gap-8 md:grid-cols-[.75fr_1.25fr] md:items-end">
@@ -109,7 +125,7 @@ function Home() {
             <div><p className="zk-eyebrow text-primary">Agora no corre</p><h2 className="zk-title mt-3 text-5xl sm:text-6xl">Lançamentos</h2></div>
             <Link to="/loja" className="zk-focus hidden text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground sm:block">Ver tudo →</Link>
           </div>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{destaque.map((p) => <ProductCard key={p.slug} product={p} />)}</div>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{destaque.map((p) => <ProductCard key={p.slug} product={p} />)}</div>
         </div>
       </section>
 
@@ -120,7 +136,7 @@ function Home() {
             <h2 className="zk-title mt-4 max-w-md text-5xl sm:text-6xl">Vestir o processo.</h2>
           </div>
           <div className="max-w-2xl space-y-6 text-sm leading-7 text-muted-foreground">
-            <p className="text-lg leading-8 text-foreground/80">A CORRES DO ZK nasceu da ideia de que nada chega pronto. A peça, a carreira, a vida — tudo é construção.</p>
+            <p className="text-lg leading-8 text-foreground/80">Nascida na rua. Feita pro seu corre. A CORRES DO ZK transforma rotina, disciplina e identidade em roupa para usar todos os dias.</p>
             <p>Por isso nossos drops são pequenos, nossos materiais são escolhidos com cuidado e nossa estética não precisa pedir licença. É roupa para quem faz acontecer sem transformar esforço em discurso vazio.</p>
             <Link to="/sobre" className="zk-focus inline-flex border-b border-primary pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Conheça a marca</Link>
           </div>
