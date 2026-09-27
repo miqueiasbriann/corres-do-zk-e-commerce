@@ -4,11 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * CORRES DO ZK — design system
- * Streetwear premium: asfalto escuro, osso e um amarelo de poste de rua.
- */
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
@@ -46,10 +41,10 @@
 }
 
 :root {
-  --radius: 0.375rem;
-  --background: oklch(0.115 0.006 65);
+  --radius: 0.5rem;
+  --background: oklch(0.105 0.006 65);
   --foreground: oklch(0.95 0.012 85);
-  --card: oklch(0.165 0.008 65);
+  --card: oklch(0.155 0.008 65);
   --card-foreground: oklch(0.95 0.012 85);
   --popover: oklch(0.17 0.008 65);
   --popover-foreground: oklch(0.95 0.012 85);
@@ -57,13 +52,13 @@
   --primary-foreground: oklch(0.16 0.01 70);
   --secondary: oklch(0.205 0.008 65);
   --secondary-foreground: oklch(0.95 0.012 85);
-  --muted: oklch(0.195 0.008 65);
+  --muted: oklch(0.19 0.008 65);
   --muted-foreground: oklch(0.68 0.012 75);
   --accent: oklch(0.245 0.012 75);
   --accent-foreground: oklch(0.95 0.012 85);
   --destructive: oklch(0.58 0.2 25);
   --destructive-foreground: oklch(0.97 0.01 85);
-  --border: oklch(0.31 0.01 70);
+  --border: oklch(0.29 0.01 70);
   --input: oklch(0.31 0.01 70);
   --ring: oklch(0.84 0.15 86);
   --sidebar: oklch(0.17 0.006 60);
@@ -99,6 +94,11 @@
     text-rendering: optimizeLegibility;
   }
 
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
   h1,
   h2,
   h3 {
@@ -116,7 +116,8 @@
 }
 
 @utility zk-eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
@@ -127,28 +128,30 @@
   white-space: nowrap;
 }
 
+@utility zk-grid {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--color-border) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--color-border) 22%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
 @keyframes zk-slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @utility zk-grain {
   position: relative;
+  isolation: isolate;
+
   &::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.35;
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      oklch(1 0 0 / 6%) 1px,
-      transparent 0
-    );
+    z-index: 2;
+    opacity: 0.3;
+    background-image: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 6%) 1px, transparent 0);
     background-size: 4px 4px;
   }
 }
@@ -156,27 +159,50 @@
 @layer components {
   .zk-surface {
     border: 1px solid color-mix(in oklch, var(--color-border) 78%, transparent);
-    background: linear-gradient(145deg, color-mix(in oklch, var(--color-card) 96%, white 4%), var(--color-card));
+    background:
+      linear-gradient(145deg, color-mix(in oklch, var(--color-card) 96%, white 4%), var(--color-card));
     box-shadow: 0 18px 50px color-mix(in oklch, black 24%, transparent);
   }
 
   .zk-interactive {
-    transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .zk-interactive:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     border-color: color-mix(in oklch, var(--color-primary) 48%, var(--color-border));
-    box-shadow: 0 14px 34px color-mix(in oklch, black 22%, transparent);
+    box-shadow: 0 18px 42px color-mix(in oklch, black 30%, transparent);
   }
 
   .zk-focus:focus-visible {
     outline: 2px solid var(--color-ring);
     outline-offset: 3px;
   }
+
+  .zk-image-frame {
+    overflow: hidden;
+    background: var(--color-muted);
+  }
+
+  .zk-image-frame img {
+    transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 300ms ease;
+  }
+
+  .zk-image-frame:hover img {
+    transform: scale(1.045);
+    filter: saturate(1.05) contrast(1.03);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
