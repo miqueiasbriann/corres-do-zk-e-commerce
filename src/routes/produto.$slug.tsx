@@ -55,9 +55,9 @@ function Produto() {
     .slice(0, 3);
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-12">
+    <div className="mx-auto max-w-7xl px-5 py-10 sm:py-14">
       <div className="grid gap-12 lg:grid-cols-2">
-        <div className="zk-grain border border-border bg-card">
+        <div className="zk-surface zk-grain overflow-hidden rounded-sm">
           <img
             src={product.image}
             alt={product.name}
@@ -83,10 +83,10 @@ function Produto() {
               <button
                 key={s}
                 onClick={() => setSize(s)}
-                className={`h-11 w-14 border text-sm uppercase transition-colors ${
+                className={`zk-focus h-11 w-14 rounded-sm border text-sm uppercase transition-all ${
                   size === s
                     ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border hover:border-foreground"
+                    : "border-border bg-card/50 hover:border-primary/50 hover:bg-accent"
                 }`}
               >
                 {s}
@@ -118,7 +118,7 @@ function Produto() {
             Adicionar à sacola
           </Button>
 
-          <ul className="mt-8 space-y-2 text-xs uppercase tracking-[0.15em] text-muted-foreground">
+          <ul className="mt-8 grid gap-2 border-t border-border/70 pt-6 text-xs uppercase tracking-[0.15em] text-muted-foreground sm:grid-cols-3">
             <li>{product.stock} peças disponíveis</li>
             <li>Envio em até 3 dias úteis</li>
             <li>Troca gratuita em 7 dias</li>
