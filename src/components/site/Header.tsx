@@ -6,8 +6,8 @@ import { CartSheet } from "./CartSheet";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const nav = [
-  { to: "/loja", label: "Loja" },
-  { to: "/sobre", label: "A Marca" },
+  { to: "/loja", label: "Coleção" },
+  { to: "/sobre", label: "Manifesto" },
   { to: "/contato", label: "Contato" },
 ] as const;
 
@@ -16,22 +16,24 @@ export function Header() {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/88 shadow-[0_10px_36px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-6">
         <div className="flex items-center gap-10">
-          <Link to="/" className="zk-title zk-focus rounded-sm text-xl tracking-tight sm:text-2xl">
-            CORRES <span className="text-primary">DO ZK</span>
+          <Link to="/" className="zk-focus rounded-sm" aria-label="CORRES DO ZK — início">
+            <span className="zk-title text-xl tracking-tight sm:text-2xl">
+              CORRES <span className="text-primary">DO ZK</span>
+            </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 md:flex">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Navegação principal">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                className="zk-focus rounded-sm py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground"
+                className="zk-focus rounded-sm py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-foreground"
                 activeProps={{
                   className:
-                    "zk-focus rounded-sm py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground",
+                    "zk-focus rounded-sm py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-foreground",
                 }}
               >
                 {item.label}
@@ -42,9 +44,10 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <button
+            type="button"
             onClick={() => setCartOpen(true)}
             aria-label={count > 0 ? `Abrir sacola, ${count} itens` : "Abrir sacola"}
-            className="zk-focus relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:bg-accent"
+            className="zk-focus relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 transition-all hover:-translate-y-0.5 hover:border-primary/60"
           >
             <ShoppingBag className="h-[17px] w-[17px]" />
             {count > 0 && (
@@ -57,27 +60,27 @@ export function Header() {
           <Sheet>
             <SheetTrigger
               aria-label="Abrir menu"
-              className="zk-focus inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 transition-all hover:border-primary/60 md:hidden"
+              className="zk-focus inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/70 md:hidden"
             >
               <Menu className="h-[17px] w-[17px]" />
             </SheetTrigger>
-            <SheetContent side="right" className="w-[min(22rem,88vw)] border-l-border bg-background/95 backdrop-blur-xl">
-              <nav className="mt-10 flex flex-col gap-5 px-5">
-                <p className="zk-eyebrow mb-2">Menu</p>
+            <SheetContent side="right" className="w-[min(22rem,88vw)] border-l-border bg-background/98">
+              <nav className="mt-10 flex flex-col gap-5 px-5" aria-label="Menu mobile">
+                <p className="zk-eyebrow mb-2 text-primary">CORRES DO ZK</p>
                 {nav.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className="zk-title text-3xl text-foreground transition-colors hover:text-primary"
-                  >
+                  <Link key={item.to} to={item.to} className="zk-title text-3xl transition-colors hover:text-primary">
                     {item.label}
                   </Link>
                 ))}
+                <Link to="/loja" className="mt-4 inline-flex h-12 items-center justify-center bg-primary text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground">
+                  Ver coleção
+                </Link>
               </nav>
             </SheetContent>
           </Sheet>
         </div>
       </div>
+      <CartSheet open={cartOpen} onOpenChange={setCartOpen} />
     </header>
   );
 }
