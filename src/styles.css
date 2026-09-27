@@ -185,3 +185,172 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+@keyframes zk-chrome-spin {
+  from { transform: rotateY(-14deg) rotateX(5deg) rotateZ(-1deg); }
+  50% { transform: rotateY(10deg) rotateX(-2deg) rotateZ(1deg); }
+  to { transform: rotateY(-14deg) rotateX(5deg) rotateZ(-1deg); }
+}
+
+@keyframes zk-hero-depth {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(0, -4vh, 0) scale(1.025); }
+}
+
+@layer components {
+  .zk-chrome-mark-shell {
+    position: absolute;
+    right: clamp(1rem, 7vw, 7rem);
+    top: 14%;
+    z-index: 3;
+    width: clamp(8rem, 28vw, 28rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    perspective: 1100px;
+    pointer-events: none;
+  }
+
+  .zk-chrome-fallback {
+    position: absolute;
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 18vw, 16rem);
+    line-height: .75;
+    letter-spacing: -.08em;
+    color: color-mix(in oklch, white 76%, var(--color-muted-foreground));
+    opacity: .32;
+    filter: drop-shadow(0 18px 24px rgb(0 0 0 / .32));
+    transition: opacity 220ms ease;
+  }
+
+  .zk-chrome-mark {
+    position: relative;
+    display: block;
+    transform-style: preserve-3d;
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 18vw, 16rem);
+    line-height: .75;
+    letter-spacing: -.08em;
+    transform: rotateY(-14deg) rotateX(5deg) rotateZ(-1deg);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    animation: zk-chrome-spin 12s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .zk-chrome-mark-shell.is-ready .zk-chrome-fallback { opacity: 0; }
+  .zk-chrome-mark-shell.is-ready .zk-chrome-mark { opacity: 1; }
+
+  .zk-chrome-face,
+  .zk-chrome-extrusion {
+    position: absolute;
+    inset: 0;
+    display: block;
+    -webkit-text-stroke: 1px rgb(255 255 255 / .28);
+  }
+
+  .zk-chrome-face {
+    position: relative;
+    z-index: 4;
+    color: transparent;
+    background:
+      linear-gradient(110deg,
+        #747474 0%,
+        #f7f7f7 14%,
+        #969696 28%,
+        #ffffff 42%,
+        #5b5b5b 57%,
+        #d9d9d9 71%,
+        #6b6b6b 84%,
+        #f4f4f4 100%);
+    background-size: 220% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow:
+      0 1px 0 rgb(255 255 255 / .45),
+      0 4px 0 rgb(0 0 0 / .18),
+      0 16px 30px rgb(0 0 0 / .42);
+    animation: zk-chrome-sheen 6s ease-in-out infinite;
+  }
+
+  @keyframes zk-chrome-sheen {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .zk-chrome-extrusion {
+    z-index: 1;
+    color: #3e3e3e;
+    text-shadow: 0 2px 0 #222;
+  }
+
+  .zk-chrome-extrusion-1 { transform: translate3d(3px, 3px, -1px); }
+  .zk-chrome-extrusion-2 { transform: translate3d(6px, 6px, -2px); }
+  .zk-chrome-extrusion-3 { transform: translate3d(9px, 9px, -3px); opacity: .75; }
+
+  .zk-hero-depth {
+    animation: zk-hero-depth linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 70vh;
+    will-change: transform;
+  }
+
+  .zk-card-3d {
+    transform: perspective(900px) rotateX(0) rotateY(0) translateZ(0);
+    transform-style: preserve-3d;
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1), box-shadow 260ms ease;
+  }
+
+  .zk-card-3d:hover {
+    transform: perspective(900px) rotateX(1.5deg) rotateY(-1.5deg) translateY(-4px) translateZ(3px);
+    box-shadow: 0 22px 48px rgb(0 0 0 / .34);
+  }
+
+  .zk-card-3d:focus-visible {
+    transform: perspective(900px) translateY(-2px);
+  }
+
+  @media (hover: none) {
+    .zk-card-3d:active {
+      transform: scale(.992);
+      transition-duration: 100ms;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .zk-chrome-mark-shell {
+      right: -2rem;
+      top: 9%;
+      width: clamp(8rem, 48vw, 15rem);
+      opacity: .68;
+    }
+
+    .zk-chrome-mark {
+      animation-duration: 16s;
+    }
+
+    .zk-hero-depth {
+      animation-range: 0 48vh;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .zk-chrome-mark,
+    .zk-chrome-face,
+    .zk-hero-depth {
+      animation: none;
+    }
+
+    .zk-card-3d:hover,
+    .zk-card-3d:focus-visible {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce), (max-width: 420px) {
+    .zk-chrome-mark-shell {
+      opacity: .5;
+    }
+  }
+}
