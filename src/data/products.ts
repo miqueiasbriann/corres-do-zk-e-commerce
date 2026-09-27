@@ -5,7 +5,7 @@ export type Product = {
   slug: string;
   name: string;
   price: number;
-  category: "Moletons" | "Camisetas" | "Acessórios";
+  category: "Moletons" | "Camisetas" | "Conjuntos" | "Calças" | "Boné" | "Acessórios";
   image: string;
   drop: string;
   stock: number;
