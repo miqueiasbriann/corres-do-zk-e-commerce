@@ -137,6 +137,14 @@
 
 @layer components {
   .zk-focus:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
+  .zk-hero { min-height: min(760px, calc(100svh - 4.35rem)); background: var(--color-background); }
+  .zk-hero-inner { min-height: min(760px, calc(100svh - 4.35rem)); }
+  .zk-hero-copy { width: min(56%, 660px); }
+  .zk-hero-photo { object-position: center center; }
+  .zk-hero-shade { background: linear-gradient(90deg, var(--color-background) 0%, color-mix(in srgb, var(--color-background) 87%, transparent) 23%, transparent 72%); }
+  .zk-hero-mascot { bottom: 0; right: 1.5%; width: min(19vw, 245px); filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--color-background) 70%, transparent)); }
+  .zk-editorial { height: clamp(220px, 27vw, 330px); }
+  .zk-editorial-shade { background: color-mix(in srgb, var(--color-background) 44%, transparent); }
   .zk-image-frame img { transition: transform 520ms cubic-bezier(.2,.8,.2,1), filter 300ms ease; }
   .zk-image-frame:hover img { transform: scale(1.035); filter: saturate(1.04) contrast(1.04); }
   .zk-card-3d {
@@ -185,16 +193,22 @@
   .zk-chrome-crown-shell { right: .5rem; top: 5.4rem; width: clamp(8.5rem, 27vw, 14rem); opacity: .86; }
 }
 @media (max-width: 639px) {
-  .zk-hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(180deg, rgb(0 0 0 / .15) 0%, transparent 28%, rgb(0 0 0 / .28) 58%, rgb(0 0 0 / .82) 100%);
-  }
+  .zk-hero, .zk-hero-inner { min-height: 720px; }
+  .zk-hero-inner { align-items: flex-end; padding-bottom: 35px; }
+  .zk-hero-copy { width: 100%; padding-bottom: 120px; }
+  .zk-hero-copy h1 { max-width: 8ch; }
+  .zk-hero-photo { height: 60%; object-position: 67% center; }
+  .zk-hero-shade { background: linear-gradient(180deg, transparent 0%, transparent 33%, var(--color-background) 61%, var(--color-background) 100%); }
+  .zk-hero-mascot { width: min(35vw, 150px); right: 0; bottom: 0; }
+  .zk-editorial { height: 210px; }
+  .zk-editorial img { object-position: center center; }
   .zk-chrome-crown-shell { right: -1rem; top: 4.9rem; width: 8.25rem; opacity: .64; }
   .zk-hero-depth { animation: none; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .zk-hero-copy { width: 62%; }
+  .zk-hero-shade { background: linear-gradient(90deg, var(--color-background), color-mix(in srgb, var(--color-background) 72%, transparent) 37%, transparent 80%); }
+  .zk-hero-mascot { width: min(20vw, 190px); }
 }
 @media (hover: none) {
   .zk-card-3d:hover { transform: none; box-shadow: none; }
@@ -218,6 +232,9 @@
 }
 
 @media (max-width: 389px) {
+  .zk-hero, .zk-hero-inner { min-height: 700px; }
+  .zk-hero-copy { padding-bottom: 105px; }
+  .zk-hero-mascot { width: 120px; }
   .zk-chrome-crown-shell {
     right: -.65rem;
     top: 5rem;
