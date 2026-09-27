@@ -30,12 +30,12 @@ function Sobre() {
           loading="lazy"
           width={1600}
           height={1008}
-          className="h-[45vh] w-full object-cover"
+          className="h-[42svh] min-h-[360px] w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <div className="mx-auto max-w-3xl px-5 py-20">
+      <div className="mx-auto max-w-3xl px-5 py-16 sm:py-24">
         <p className="zk-eyebrow">A marca</p>
         <h1 className="zk-title mt-3 text-5xl">Nascido no corre</h1>
         <div className="mt-8 space-y-6 text-sm leading-relaxed text-muted-foreground">
@@ -55,13 +55,13 @@ function Sobre() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-3">
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
           {[
             { n: "2019", l: "Primeira tiragem" },
             { n: "+12k", l: "Peças entregues" },
             { n: "100%", l: "Produção local" },
           ].map((s) => (
-            <div key={s.l}>
+            <div key={s.l} className="zk-surface p-5">
               <p className="zk-title text-4xl text-primary">{s.n}</p>
               <p className="zk-eyebrow mt-2">{s.l}</p>
             </div>
