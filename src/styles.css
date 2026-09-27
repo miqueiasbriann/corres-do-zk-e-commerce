@@ -111,7 +111,7 @@
 
 @utility zk-grit-overlay {
   pointer-events: none;
-  opacity: 0.34;
+  opacity: 0.16;
   background-image:
     radial-gradient(circle at 18% 24%, rgb(255 255 255 / .11) 0 1px, transparent 1.5px),
     radial-gradient(circle at 72% 64%, rgb(255 255 255 / .07) 0 1px, transparent 1.5px),
@@ -182,7 +182,7 @@
 }
 
 @media (max-width: 1023px) {
-  .zk-chrome-crown-shell { right: -1.5rem; top: 6rem; width: clamp(9rem, 34vw, 16rem); opacity: .9; }
+  .zk-chrome-crown-shell { right: .5rem; top: 5.4rem; width: clamp(8.5rem, 27vw, 14rem); opacity: .86; }
 }
 @media (max-width: 639px) {
   .zk-hero::before {
@@ -193,7 +193,7 @@
     pointer-events: none;
     background: linear-gradient(180deg, rgb(0 0 0 / .15) 0%, transparent 28%, rgb(0 0 0 / .28) 58%, rgb(0 0 0 / .82) 100%);
   }
-  .zk-chrome-crown-shell { right: -2.4rem; top: 5.4rem; width: 10.5rem; opacity: .7; }
+  .zk-chrome-crown-shell { right: -1rem; top: 4.9rem; width: 8.25rem; opacity: .64; }
   .zk-hero-depth { animation: none; }
 }
 @media (hover: none) {
@@ -208,4 +208,28 @@
     transition-duration: 0.01ms !important;
   }
   .zk-chrome-crown-tilt, .zk-hero-depth, .zk-card-3d { animation: none !important; transform: none !important; }
+}
+
+
+@supports (padding: max(0px)) {
+  .zk-safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 389px) {
+  .zk-chrome-crown-shell {
+    right: -.65rem;
+    top: 5rem;
+    width: 7.4rem;
+    opacity: .58;
+  }
+}
+
+@media (min-width: 390px) and (max-width: 639px) {
+  .zk-chrome-crown-shell {
+    right: -.8rem;
+    top: 5.1rem;
+    width: 8.7rem;
+  }
 }
