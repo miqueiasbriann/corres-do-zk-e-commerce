@@ -20,8 +20,6 @@ export const Route = createFileRoute("/loja")({
   component: Loja,
 });
 
-const filtros = ["Tudo", "Camisetas", "Moletons", "Conjuntos", "Calças", "Boné", "Acessórios"] as const;
-
 function Loja() {
   const navigate = useNavigate({ from: "/loja" });
   const { categoria } = Route.useSearch();
