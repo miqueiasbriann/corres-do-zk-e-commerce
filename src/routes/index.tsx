@@ -23,7 +23,7 @@ const categories = [
   { label: "Conjuntos", kicker: "03 / CONJUNTOS", state: "available" },
   { label: "Calças", kicker: "04 / CALÇAS", state: "available" },
   { label: "Boné", kicker: "05 / BONÉ", state: "available" },
-  { label: "Acessórios", kicker: "06 / EM BREVE", state: "soon" },
+  { label: "Acessórios", kicker: "06 / ACESSÓRIOS", state: "soon" },
 ] as const;
 
 function Home() {
@@ -97,7 +97,7 @@ function Home() {
             ) : (
               <div key={category.label} className="border-b border-border p-6 opacity-45 sm:border-l lg:border-b-0 lg:border-l">
                 <p className="text-[9px] font-bold tracking-[0.2em]">{category.kicker}</p>
-                <div className="mt-14 flex items-end justify-between gap-3"><h3 className="text-3xl">{category.label}</h3><span className="text-[9px] font-bold uppercase tracking-[0.18em]">Soon</span></div>
+                <div className="mt-14 flex items-end justify-between gap-3"><h3 className="text-3xl">{category.label}</h3><span className="text-[9px] font-bold uppercase tracking-[0.18em]">Em breve</span></div>
               </div>
             )
           ))}
