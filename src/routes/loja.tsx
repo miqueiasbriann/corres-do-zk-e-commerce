@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { products } from "@/data/products";
 
+const filtros = ["Tudo", "Camisetas", "Moletons", "Conjuntos", "Calças", "Boné", "Acessórios"] as const;
+
 export const Route = createFileRoute("/loja")({
   validateSearch: (search: Record<string, unknown>) => ({
     categoria:
@@ -13,7 +15,7 @@ export const Route = createFileRoute("/loja")({
   head: () => ({
     meta: [
       { title: "Coleção — CORRES DO ZK" },
-      { name: "description", content: "Coleção CORRES DO ZK: streetwear premium em tiragem limitada." },
+      { name: "description", content: "Coleção CORRES DO ZK. Nascida na rua. Feita pro seu corre." },
     ],
   }),
   component: Loja,
@@ -36,7 +38,7 @@ function Loja() {
               <p className="zk-eyebrow text-primary">Drop atual / 01</p>
               <h1 className="zk-title mt-3 text-7xl sm:text-8xl">Coleção</h1>
               <p className="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
-                Nascida na rua. Feita pro seu corre. Peças de presença, produzidas em pequenas tiragens.
+                Nascida na rua. Feita pro seu corre. Explore as peças da coleção.
               </p>
             </div>
             <div className="border-l-2 border-primary pl-5">
@@ -69,8 +71,8 @@ function Loja() {
 
         {lista.length === 0 && (
           <div className="mt-16 border border-dashed border-border p-12 text-center">
-            <p className="zk-eyebrow text-primary">Em breve</p>
-            <p className="mt-3 text-sm text-muted-foreground">Essa categoria entra no próximo drop.</p>
+            <p className="zk-eyebrow text-primary">{filtro === "Acessórios" ? "Acessórios / Em breve" : "Categoria"}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{filtro === "Acessórios" ? "Acessórios — Em breve." : "Nenhum produto cadastrado nesta categoria."}</p>
           </div>
         )}
       </div>
