@@ -6,11 +6,12 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import hero from "@/assets/hero.jpg";
+import hero from "@/WhatsApp Image 2026-09-27 at 12.04.13.jpeg";
+import editorial from "@/WhatsApp Image 2026-09-27 at 11.53.21.jpeg";
 import hoodie from "@/assets/p-hoodie.jpg";
 import tee from "@/assets/p-tee.jpg";
-import logo from "@/assets/logo-zk-original.webp";
-import mascot from "@/assets/mascot-zk-original.webp";
+import logo from "@/WhatsApp Image 2026-09-27 at 11.25.50.jpeg";
+import mascot from "@/WhatsApp Image 2026-09-27 at 11.27.36.jpeg";
 import { products } from "@/data/products";
 
 export type SiteTextKey =
@@ -48,7 +49,7 @@ export const defaultSiteContent: SiteContent = {
     hero,
     heroMobile: hero,
     mascot,
-    editorial: hoodie,
+    editorial,
     categories: {
       Camisetas: tee,
       Moletons: hoodie,
@@ -112,69 +113,24 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const currentRaw = localStorage.getItem(STORAGE_KEY);
-      if (currentRaw) {
-        setContent(mergeContent(JSON.parse(currentRaw) as Partial<SiteContent>));
-      } else {
-        const legacyRaw =
-          localStorage.getItem("zk-site-content-v2") ??
-          localStorage.getItem("zk-site-content-v1");
-        if (legacyRaw) {
-          const migrated = mergeContent(JSON.parse(legacyRaw) as Partial<SiteContent>);
-          migrated.images.logo = defaultSiteContent.images.logo;
-          migrated.images.mascot = defaultSiteContent.images.mascot;
-          if (!migrated.images.heroMobile) migrated.images.heroMobile = migrated.images.hero;
-          setContent(migrated);
-        }
-      }
-    } catch {
-      // Defaults stay active when local content cannot be read.
-    } finally {
-      setHydrated(true);
-    }
+      if (currentRaw) setContent(mergeContent(JSON.parse(currentRaw) as Partial<SiteContent>));
+    } catch {}
+    finally { setHydrated(true); }
   }, []);
 
   useEffect(() => {
     if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
-    } catch {
-      // The storefront remains usable even if browser storage is unavailable.
-    }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(content)); } catch {}
   }, [content, hydrated]);
 
-  const value = useMemo<SiteContentContextValue>(
-    () => ({
-      content,
-      setText: (key, value) =>
-        setContent((current) => ({ ...current, text: { ...current.text, [key]: value } })),
-      setImage: (key, value) =>
-        setContent((current) => ({
-          ...current,
-          images: { ...current.images, [key]: value },
-        })),
-      setCategoryImage: (category, value) =>
-        setContent((current) => ({
-          ...current,
-          images: {
-            ...current.images,
-            categories: { ...current.images.categories, [category]: value },
-          },
-        })),
-      setProductGallery: (slug, value) =>
-        setContent((current) => ({
-          ...current,
-          images: {
-            ...current.images,
-            products: {
-              ...current.images.products,
-              [slug]: value,
-            },
-          },
-        })),
-      resetContent: () => setContent(defaultSiteContent),
-    }),
-    [content],
-  );
+  const value = useMemo<SiteContentContextValue>(() => ({
+    content,
+    setText: (key, value) => setContent((current) => ({ ...current, text: { ...current.text, [key]: value } })),
+    setImage: (key, value) => setContent((current) => ({ ...current, images: { ...current.images, [key]: value } })),
+    setCategoryImage: (category, value) => setContent((current) => ({ ...current, images: { ...current.images, categories: { ...current.images.categories, [category]: value } } })),
+    setProductGallery: (slug, value) => setContent((current) => ({ ...current, images: { ...current.images, products: { ...current.images.products, [slug]: value } } })),
+    resetContent: () => setContent(defaultSiteContent),
+  }), [content]);
 
   return <SiteContentContext.Provider value={value}>{children}</SiteContentContext.Provider>;
 }
