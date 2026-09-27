@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 190" role="img" aria-labelledby="title desc">
+  <title id="title">CORRES DO ZK</title>
+  <desc id="desc">Logo em lettering urbano com coroa vermelha.</desc>
+  <defs>
+    <filter id="rough" x="-15%" y="-30%" width="140%" height="170%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="9" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g transform="translate(14 4) rotate(-4 190 95)" filter="url(#rough)">
+    <g fill="none" stroke="#e01822" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M160 57l13-34 31 23 33-34 27 36 34-18 8 38" stroke-width="9"/>
+      <path d="M155 67h155" stroke-width="8"/>
+      <circle cx="173" cy="22" r="5" fill="#e01822" stroke="none"/>
+      <circle cx="237" cy="11" r="5" fill="#e01822" stroke="none"/>
+      <circle cx="297" cy="29" r="5" fill="#e01822" stroke="none"/>
+    </g>
+    <text x="18" y="136" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="76" font-style="italic" font-weight="900" letter-spacing="-4" fill="#fff" stroke="#0a0a0a" stroke-width="18" paint-order="stroke fill">CORRES DO</text>
+    <text x="278" y="141" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="96" font-style="italic" font-weight="900" letter-spacing="-8" fill="#e01822" stroke="#0a0a0a" stroke-width="18" paint-order="stroke fill">ZK</text>
+    <path d="M22 151c83 18 258 22 369-3" fill="none" stroke="#e01822" stroke-width="8" stroke-linecap="round"/>
+    <path d="M32 160l-15 15m56-12l-9 17m89-16l-3 17m104-18l7 16m77-24l16 15" stroke="#e01822" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#e01822">
+      <circle cx="20" cy="107" r="3"/><circle cx="39" cy="94" r="2"/><circle cx="364" cy="82" r="3"/><circle cx="383" cy="110" r="2.5"/>
+    </g>
+  </g>
+</svg>
