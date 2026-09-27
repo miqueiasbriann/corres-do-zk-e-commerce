@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,8 @@ import { formatBRL } from "@/data/products";
 import { useCart } from "@/lib/cart";
 
 export function CartSheet({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
-  const { items, setQty, remove, total, clear } = useCart();
+  const { items, setQty, remove, total } = useCart();
+  const navigate = useNavigate();
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -42,8 +43,8 @@ export function CartSheet({ open, onOpenChange }: { open: boolean; onOpenChange:
         </div>
         <div className="space-y-3 border-t border-border pt-5">
           <div className="flex items-end justify-between"><span className="zk-eyebrow">Subtotal</span><span className="zk-title text-2xl">{formatBRL(total)}</span></div>
-          <p className="text-xs text-muted-foreground">Frete calculado no atendimento. Frete grátis acima de R$ 399.</p>
-          <Button className="h-12 w-full text-xs font-bold uppercase tracking-[0.16em]" disabled={items.length === 0} onClick={() => { toast.success("Pedido reservado", { description: "Finalize o pagamento pelo WhatsApp da marca." }); clear(); onOpenChange(false); }}>Finalizar pedido</Button>
+          <p className="text-xs text-muted-foreground">Frete e pagamento serão confirmados pelo WhatsApp.</p>
+          <Button className="h-12 w-full text-xs font-bold uppercase tracking-[0.16em]" disabled={items.length === 0} onClick={() => { onOpenChange(false); navigate({ to: "/checkout" }); }}>Finalizar pedido</Button>
           <Button variant="ghost" className="w-full" asChild onClick={() => onOpenChange(false)}><Link to="/loja">Continuar comprando</Link></Button>
         </div>
       </SheetContent>
