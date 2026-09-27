@@ -166,7 +166,7 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
             ...current.images,
             products: {
               ...current.images.products,
-              [slug]: value.filter((entry) => entry.trim().length > 0),
+              [slug]: value,
             },
           },
         })),
