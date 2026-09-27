@@ -86,7 +86,7 @@ function Home() {
         <div className="mt-10 grid border-y border-border sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category, index) => (
             category.state === "available" ? (
-              <Link key={category.label} to="/loja" className="zk-focus group border-b border-border p-6 transition-colors hover:bg-card sm:nth-[2n]:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
+              <Link key={category.label} to="/loja" className="zk-focus group border-b border-border p-6 transition-colors hover:bg-card sm:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
                 <p className="text-[9px] font-bold tracking-[0.2em] text-primary">{category.kicker}</p>
                 <div className="mt-14 flex items-end justify-between gap-3">
                   <h3 className="text-3xl">{category.label}</h3>
@@ -94,7 +94,7 @@ function Home() {
                 </div>
               </Link>
             ) : (
-              <div key={category.label} className="border-b border-border p-6 opacity-45 sm:nth-[2n]:border-l lg:border-b-0 lg:border-l">
+              <div key={category.label} className="border-b border-border p-6 opacity-45 sm:border-l lg:border-b-0 lg:border-l">
                 <p className="text-[9px] font-bold tracking-[0.2em]">{category.kicker}</p>
                 <div className="mt-14 flex items-end justify-between gap-3"><h3 className="text-3xl">{category.label}</h3><span className="text-[9px] font-bold uppercase tracking-[0.18em]">Soon</span></div>
               </div>
