@@ -28,13 +28,15 @@ export const Route = createFileRoute("/produto/$slug")({
     return { product };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Peça não encontrada — CORRES DO ZK" }, { name: "robots", content: "noindex" }] };
+    if (!loaderData) return { meta: [{ title: "Peça não encontrada — CORRES DO ZK" }, { name: "description", content: "Esta peça não está disponível na CORRES DO ZK." }, { property: "og:title", content: "Peça não encontrada — CORRES DO ZK" }, { property: "og:description", content: "Esta peça não está disponível na CORRES DO ZK." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { name: "robots", content: "noindex" }] };
     const { product } = loaderData;
     return { meta: [
       { title: `${product.name} — CORRES DO ZK` },
       { name: "description", content: product.description },
       { property: "og:title", content: `${product.name} — CORRES DO ZK` },
       { property: "og:description", content: product.description },
+      { property: "og:type", content: "product" },
+      { name: "twitter:card", content: "summary_large_image" },
     ]};
   },
   notFoundComponent: () => (

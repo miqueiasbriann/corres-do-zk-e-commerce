@@ -12,6 +12,10 @@ export const Route = createFileRoute("/checkout")({
     meta: [
       { title: "Finalização — CORRES DO ZK" },
       { name: "description", content: "Confira seus dados e envie o pedido para confirmação pelo WhatsApp." },
+      { property: "og:title", content: "Finalização — CORRES DO ZK" },
+      { property: "og:description", content: "Confira seus dados e envie o pedido para confirmação pelo WhatsApp." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Checkout,

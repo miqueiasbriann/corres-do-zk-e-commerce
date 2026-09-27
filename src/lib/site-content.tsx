@@ -6,13 +6,18 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import hero from "@/WhatsApp Image 2026-09-27 at 12.04.13.jpeg";
-import editorial from "@/WhatsApp Image 2026-09-27 at 11.53.21.jpeg";
+import heroAsset from "@/assets/corres-do-zk-banner.png.asset.json";
+import editorialAsset from "@/assets/corres-do-zk-editorial.png.asset.json";
 import hoodie from "@/assets/p-hoodie.jpg";
 import tee from "@/assets/p-tee.jpg";
-import logo from "@/assets/logo-zk-original.webp";
-import mascot from "@/WhatsApp Image 2026-09-27 at 11.27.36.jpeg";
+import logoAsset from "@/assets/corres-do-zk-logo.png.asset.json";
+import mascotAsset from "@/assets/corres-do-zk-mascot.png.asset.json";
 import { products } from "@/data/products";
+
+const hero = heroAsset.url;
+const editorial = editorialAsset.url;
+const logo = logoAsset.url;
+const mascot = mascotAsset.url;
 
 export type SiteTextKey =
   | "heroKicker"

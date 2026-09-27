@@ -23,6 +23,10 @@ export const Route = createFileRoute("/loja")({
     meta: [
       { title: "Coleção — CORRES DO ZK" },
       { name: "description", content: "Coleção CORRES DO ZK. O corre não para. O estilo acompanha." },
+      { property: "og:title", content: "Coleção — CORRES DO ZK" },
+      { property: "og:description", content: "Coleção CORRES DO ZK. O corre não para. O estilo acompanha." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Loja,
