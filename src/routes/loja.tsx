@@ -1,9 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { products } from "@/data/products";
 
 export const Route = createFileRoute("/loja")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    categoria:
+      typeof search.categoria === "string" && filtros.includes(search.categoria as (typeof filtros)[number])
+        ? (search.categoria as (typeof filtros)[number])
+        : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Coleção — CORRES DO ZK" },
@@ -13,10 +19,12 @@ export const Route = createFileRoute("/loja")({
   component: Loja,
 });
 
-const filtros = ["Tudo", "Moletons", "Camisetas", "Acessórios"] as const;
+const filtros = ["Tudo", "Camisetas", "Moletons", "Conjuntos", "Calças", "Boné", "Acessórios"] as const;
 
 function Loja() {
-  const [filtro, setFiltro] = useState<(typeof filtros)[number]>("Tudo");
+  const navigate = useNavigate({ from: "/loja" });
+  const { categoria } = Route.useSearch();
+  const [filtro, setFiltro] = useState<(typeof filtros)[number]>(categoria ?? "Tudo");
   const lista = filtro === "Tudo" ? products : products.filter((p) => p.category === filtro);
 
   return (
@@ -47,7 +55,7 @@ function Loja() {
               type="button"
               role="tab"
               aria-selected={filtro === f}
-              onClick={() => setFiltro(f)}
+              onClick={() => { setFiltro(f); navigate({ search: f === "Tudo" ? {} : { categoria: f } }); }}
               className={`zk-focus shrink-0 border px-4 py-3 text-[10px] font-bold uppercase tracking-[0.18em] transition-all ${filtro === f ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}
             >
               {f}
