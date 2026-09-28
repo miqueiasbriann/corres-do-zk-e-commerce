@@ -4,12 +4,18 @@ export type AdminProductInput = {
   slug: string;
   name: string;
   price: number;
+  sale_price?: number;
   description: string;
   category: string;
   image: string;
+  images?: string[];
   stock: number;
   sizes: string[];
   colors: string[];
+  variants?: Array<{ size: string; color: string; stock: number }>;
+  drop?: string;
+  featured?: boolean;
+  active?: boolean;
 };
 
 export async function listProducts() {
