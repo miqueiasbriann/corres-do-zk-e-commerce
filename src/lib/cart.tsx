@@ -82,14 +82,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return;
-    setItems((current) => current.flatMap((item) => {
+    if (!hydrated || !products.length) return;
+    setItems((current) => {
+      const next = current.flatMap((item) => {
       const product = products.find((entry) => entry.slug === item.slug);
       if (!product) return [];
       const maxQty = getVariantStock(product, item.size, item.color);
       if (maxQty <= 0) return [];
       return [{ ...item, name: product.name, price: product.price, image: product.image, maxQty, qty: Math.min(item.qty, maxQty) }];
-    }));
+      });
+      return next.length === current.length && next.every((item, index) => Object.keys(item).every((key) => item[key as keyof CartItem] === current[index]?.[key as keyof CartItem])) ? current : next;
+    });
   }, [products, hydrated]);
 
   useEffect(() => {

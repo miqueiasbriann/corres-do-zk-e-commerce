@@ -42,6 +42,9 @@ function AuthPage() {
       if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        const { data: user } = await supabase.auth.getUser();
+        const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: user.user?.id ?? "", _role: "admin" });
+        if (!isAdmin) { await supabase.auth.signOut(); throw new Error("Esta conta não tem acesso ao painel."); }
         toast.success("Bem-vindo de volta.");
         void navigate({ to: "/admin" });
       } else {

@@ -19,7 +19,6 @@ import {
 import { formatBRL, getVariantStock } from "@/data/products";
 import { productsQueryOptions, useProducts } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
-import { useSiteContent } from "@/lib/site-content";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/produto/$slug")({
@@ -57,7 +56,6 @@ function Produto() {
   const { product } = Route.useLoaderData();
   const products = useProducts();
   const { add, items } = useCart();
-  const { content } = useSiteContent();
   const gallery = useMemo(
     () => Array.from(new Set([...product.images, product.image].filter(Boolean))),
     [product],
