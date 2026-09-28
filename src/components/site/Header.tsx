@@ -3,7 +3,7 @@ import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useSiteContent } from "@/lib/site-content";
-import { products } from "@/data/products";
+import { useProducts } from "@/lib/catalog";
 import { CartSheet } from "./CartSheet";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -14,6 +14,7 @@ const nav = [
 ] as const;
 
 export function Header() {
+  const products = useProducts();
   const { count } = useCart();
   const { content } = useSiteContent();
   const [cartOpen, setCartOpen] = useState(false);
@@ -31,7 +32,7 @@ export function Header() {
           .includes(normalized),
       )
       .slice(0, 6);
-  }, [query]);
+  }, [query, products]);
 
   const closeSearch = () => {
     setSearchOpen(false);

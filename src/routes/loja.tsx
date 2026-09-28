@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { RotateCcw, SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ProductCard } from "@/components/site/ProductCard";
-import { products } from "@/data/products";
+import { productsQueryOptions, useProducts } from "@/lib/catalog";
 
 const categorias = ["Tudo", "Camisetas", "Moletons", "Conjuntos", "Calças", "Boné", "Acessórios"] as const;
 const priceOptions = [
@@ -13,6 +13,7 @@ const priceOptions = [
 ] as const;
 
 export const Route = createFileRoute("/loja")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
   validateSearch: (search: Record<string, unknown>): { categoria?: (typeof categorias)[number] } => {
     const raw = search["categoria"];
     return typeof raw === "string" && categorias.includes(raw as (typeof categorias)[number])
@@ -33,6 +34,7 @@ export const Route = createFileRoute("/loja")({
 });
 
 function Loja() {
+  const products = useProducts();
   const navigate = useNavigate({ from: "/loja" });
   const { categoria } = Route.useSearch();
   const categoriaAtiva = categoria ?? "Tudo";
@@ -43,11 +45,11 @@ function Loja() {
 
   const sizes = useMemo(
     () => Array.from(new Set(products.flatMap((product) => product.sizes))).sort(),
-    [],
+    [products],
   );
   const colors = useMemo(
     () => Array.from(new Set(products.flatMap((product) => product.colors))).sort(),
-    [],
+    [products],
   );
 
   const lista = useMemo(() => {
@@ -67,7 +69,7 @@ function Loja() {
       if (sort === "name") return a.name.localeCompare(b.name, "pt-BR");
       return products.indexOf(a) - products.indexOf(b);
     });
-  }, [categoriaAtiva, color, price, size, sort]);
+  }, [categoriaAtiva, color, price, size, sort, products]);
 
   const hasExtraFilters = size !== "all" || color !== "all" || price !== "all" || sort !== "featured";
   const resetFilters = () => {

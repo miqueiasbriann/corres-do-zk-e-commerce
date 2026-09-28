@@ -39,7 +39,7 @@ export function rowToProduct(row: ProductRow): Product {
 export const productsQueryOptions = queryOptions({
   queryKey: ["products"],
   queryFn: async () => (await listProductsFn()).map(rowToProduct),
-  staleTime: 30_000,
+  staleTime: 0,
 });
 
 export function useProducts(): Product[] {
