@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ImagePlus, Package, Pencil } from "lucide-react";
+import { ImagePlus, Package, Pencil, Save } from "lucide-react";
 import { products as demoProducts } from "@/data/products";
-import { listProducts } from "@/services/products";
+import { listProducts, saveProduct, type AdminProductInput } from "@/services/products";
 import type { Product } from "@/data/products";
 
 export const Route = createFileRoute("/admin")({
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/admin")({
 function AdminPage() {
   const [products, setProducts] = useState<Product[]>(demoProducts);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(demoProducts[0] ?? null);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     listProducts()
@@ -24,6 +25,21 @@ function AdminPage() {
       .catch(() => undefined);
   }, []);
 
+  async function handleSave() {
+    if (!selectedProduct) return;
+    setSaving(true);
+    try {
+      await saveProduct(selectedProduct as AdminProductInput);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function updateField(field: keyof Product, value: string | number) {
+    if (!selectedProduct) return;
+    setSelectedProduct({ ...selectedProduct, [field]: value });
+  }
+
   return (
     <main className="min-h-screen bg-black px-6 py-10 text-white md:px-12">
       <div className="mx-auto max-w-7xl">
@@ -35,8 +51,8 @@ function AdminPage() {
 
         <section className="grid gap-6 md:grid-cols-3">
           <Card icon={<Package />} title={String(products.length)} subtitle="Produtos" />
-          <Card icon={<Pencil />} title="Catálogo" subtitle="Banco conectado" />
-          <Card icon={<ImagePlus />} title="Imagens" subtitle="Próxima etapa" />
+          <Card icon={<Pencil />} title="Catálogo" subtitle="Editor ativo" />
+          <Card icon={<ImagePlus />} title="Imagens" subtitle="Preparado" />
         </section>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-[360px_1fr]">
@@ -50,17 +66,23 @@ function AdminPage() {
             ))}
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            {selectedProduct && <>
-              <h2 className="text-2xl font-black">{selectedProduct.name}</h2>
+          {selectedProduct && (
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+              <h2 className="text-2xl font-black">Editar produto</h2>
               <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <Field label="Preço" value={`R$ ${selectedProduct.price}`} />
-                <Field label="Estoque" value={String(selectedProduct.stock)} />
-                <Field label="Categoria" value={selectedProduct.category} />
-                <Field label="Drop" value={selectedProduct.drop} />
+                <Input label="Nome" value={selectedProduct.name} onChange={(v) => updateField("name", v)} />
+                <Input label="Preço" value={selectedProduct.price} onChange={(v) => updateField("price", Number(v))} />
+                <Input label="Estoque" value={selectedProduct.stock} onChange={(v) => updateField("stock", Number(v))} />
+                <Input label="Categoria" value={selectedProduct.category} onChange={(v) => updateField("category", v)} />
+                <div className="md:col-span-2">
+                  <Input label="Imagem principal" value={selectedProduct.image} onChange={(v) => updateField("image", v)} />
+                </div>
               </div>
-            </>}
-          </div>
+              <button onClick={handleSave} disabled={saving} className="mt-6 flex items-center gap-2 rounded-full bg-red-600 px-6 py-3 font-bold disabled:opacity-50">
+                <Save size={18} /> {saving ? "Salvando" : "Salvar alterações"}
+              </button>
+            </div>
+          )}
         </section>
       </div>
     </main>
@@ -71,6 +93,6 @@ function Card({ icon, title, subtitle }: { icon: React.ReactNode; title: string;
   return <div className="rounded-3xl border border-white/10 bg-white/5 p-6"><div className="mb-4 text-red-500">{icon}</div><strong className="text-3xl">{title}</strong><p className="text-white/60">{subtitle}</p></div>;
 }
 
-function Field({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-2xl bg-black/40 p-4"><p className="text-xs uppercase text-white/50">{label}</p><p className="mt-1 font-bold">{value}</p></div>;
+function Input({ label, value, onChange }: { label: string; value: string | number; onChange: (value: string) => void }) {
+  return <label className="block"><span className="mb-2 block text-xs uppercase text-white/50">{label}</span><input className="w-full rounded-xl bg-black/40 p-3" value={value} onChange={(event) => onChange(event.target.value)} /></label>;
 }
