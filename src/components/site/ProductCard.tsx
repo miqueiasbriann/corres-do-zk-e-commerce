@@ -1,11 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { formatBRL, type Product } from "@/data/products";
-import { useSiteContent } from "@/lib/site-content";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { content } = useSiteContent();
-  const gallery = content.images.products[product.slug] ?? product.images;
+  const gallery = product.images;
   const image = gallery[0] || product.image;
 
   return (

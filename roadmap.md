@@ -1,0 +1,4 @@
+- [ ] Proteger o painel para a conta administradora e permitir sair.
+- [ ] Criar edição simples de produtos, fotos, preços e estoque no painel.
+- [ ] Mostrar o catálogo salvo na loja, busca, página da peça e sacola.
+- [ ] Conferir funcionamento e layout no computador e no celular.

@@ -2,10 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Instagram, MessageCircle, Play } from "lucide-react";
 import { ProductCard } from "@/components/site/ProductCard";
 import { Button } from "@/components/ui/button";
-import { products } from "@/data/products";
+import { productsQueryOptions, useProducts } from "@/lib/catalog";
 import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
   head: () => ({
     meta: [
       { title: "CORRES DO ZK — O CORRE NÃO PARA" },
@@ -30,6 +31,7 @@ const categoryMeta = [
 
 function Home() {
   const { content } = useSiteContent();
+  const products = useProducts();
   const radar = products.slice(0, 4);
   const editorialParts = content.text.editorialTitle.split(" SUA ");
 

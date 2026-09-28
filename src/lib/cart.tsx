@@ -7,7 +7,8 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { getProduct, getVariantStock } from "@/data/products";
+import { getVariantStock } from "@/data/products";
+import { useProducts } from "@/lib/catalog";
 
 export type CartItem = {
   slug: string;
@@ -48,18 +49,14 @@ function normalizeStoredItems(value: unknown): CartItem[] {
     const item = raw as Partial<CartItem>;
     if (!item.slug || !item.size || !item.name || typeof item.price !== "number") return [];
 
-    const product = getProduct(item.slug);
-    if (!product) return [];
-
-    const color = item.color || product.colors[0] || "";
-    const maxQty = getVariantStock(product, item.size, color);
-    if (maxQty <= 0) return [];
+    const color = item.color || "Preto";
+    const maxQty = Math.max(1, Number(item.maxQty) || 1);
 
     return [{
-      slug: product.slug,
-      name: product.name,
-      price: product.price,
-      image: item.image || product.image,
+      slug: item.slug,
+      name: item.name,
+      price: item.price,
+      image: item.image || "",
       size: item.size,
       color,
       qty: Math.min(Math.max(1, Number(item.qty) || 1), maxQty),
@@ -69,6 +66,7 @@ function normalizeStoredItems(value: unknown): CartItem[] {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const products = useProducts();
   const [items, setItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
@@ -82,6 +80,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setHydrated(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (!hydrated || !products.length) return;
+    setItems((current) => {
+      const next = current.flatMap((item) => {
+      const product = products.find((entry) => entry.slug === item.slug);
+      if (!product) return [];
+      const maxQty = getVariantStock(product, item.size, item.color);
+      if (maxQty <= 0) return [];
+      return [{ ...item, name: product.name, price: product.price, image: product.image, maxQty, qty: Math.min(item.qty, maxQty) }];
+      });
+      return next.length === current.length && next.every((item, index) => Object.keys(item).every((key) => item[key as keyof CartItem] === current[index]?.[key as keyof CartItem])) ? current : next;
+    });
+  }, [products, hydrated]);
 
   useEffect(() => {
     if (!hydrated) return;

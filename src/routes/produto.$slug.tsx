@@ -16,14 +16,15 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { formatBRL, getProduct, getVariantStock, products } from "@/data/products";
+import { formatBRL, getVariantStock } from "@/data/products";
+import { productsQueryOptions, useProducts } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
-import { useSiteContent } from "@/lib/site-content";
 import { ProductCard } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/produto/$slug")({
-  loader: ({ params }) => {
-    const product = getProduct(params.slug);
+  loader: async ({ params, context }) => {
+    const products = await context.queryClient.ensureQueryData(productsQueryOptions);
+    const product = products.find((item) => item.slug === params.slug);
     if (!product) throw notFound();
     return { product };
   },
@@ -47,17 +48,17 @@ export const Route = createFileRoute("/produto/$slug")({
       <Button asChild className="mt-8 rounded-none"><Link to="/loja">Voltar para a coleção</Link></Button>
     </div>
   ),
+  errorComponent: () => <div className="mx-auto max-w-3xl px-5 py-32 text-center">Não foi possível carregar esta peça. Tente novamente.</div>,
   component: Produto,
 });
 
 function Produto() {
   const { product } = Route.useLoaderData();
+  const products = useProducts();
   const { add, items } = useCart();
-  const { content } = useSiteContent();
-  const configuredGallery = content.images.products[product.slug] ?? [];
   const gallery = useMemo(
-    () => Array.from(new Set([...configuredGallery, ...product.images, product.image].filter(Boolean))),
-    [configuredGallery, product],
+    () => Array.from(new Set([...product.images, product.image].filter(Boolean))),
+    [product],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
