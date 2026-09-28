@@ -70,7 +70,7 @@ function Admin() {
     const paths = draft.images.filter((image) => image.startsWith(STORAGE_PREFIX)).map((image) => image.slice(STORAGE_PREFIX.length));
     if (!paths.length) return;
     void supabase.storage.from(PRODUCT_BUCKET).createSignedUrls(paths, 3600).then(({ data }) => {
-      if (active) setPreviews(Object.fromEntries((data ?? []).filter((entry) => entry.signedUrl).map((entry) => [STORAGE_PREFIX + entry.path, entry.signedUrl])));
+      if (active) setPreviews(Object.fromEntries((data ?? []).filter((entry): entry is typeof entry & { signedUrl: string } => typeof entry.signedUrl === "string").map((entry) => [STORAGE_PREFIX + entry.path, entry.signedUrl])));
     });
     return () => { active = false; };
   }, [draft?.id, draft?.images.join("|")]);
