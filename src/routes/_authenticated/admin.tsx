@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { formatBRL, products, storeConfig } from "@/data/products";
 import { type SiteTextKey, useSiteContent } from "@/lib/site-content";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
       { title: "Painel — CORRES DO ZK" },
