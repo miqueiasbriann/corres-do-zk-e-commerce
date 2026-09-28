@@ -18,6 +18,20 @@ export type AdminProductInput = {
   active?: boolean;
 };
 
+function normalizeProduct(product: AdminProductInput) {
+  return {
+    ...product,
+    images: product.images ?? (product.image ? [product.image] : []),
+    sizes: product.sizes ?? [],
+    colors: product.colors ?? [],
+    variants: product.variants ?? [],
+    featured: product.featured ?? false,
+    active: product.active ?? true,
+    sale_price: product.sale_price ?? null,
+    drop: product.drop ?? "",
+  };
+}
+
 export async function listProducts() {
   if (!supabase) return [];
 
@@ -33,9 +47,11 @@ export async function listProducts() {
 export async function saveProduct(product: AdminProductInput) {
   if (!supabase) throw new Error("Supabase não configurado");
 
+  const payload = normalizeProduct(product);
+
   const { data, error } = await supabase
     .from("products")
-    .upsert(product)
+    .upsert(payload)
     .select()
     .single();
 
