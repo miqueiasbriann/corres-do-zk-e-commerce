@@ -250,3 +250,7 @@
     width: 8.7rem;
   }
 }
+
+#lovable-badge {
+  display: none !important;
+}
