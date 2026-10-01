@@ -1,4 +1,4 @@
-import { Instagram, MessageCircle, Play } from "lucide-react";
+import { Instagram, MessageCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useSiteContent } from "@/lib/site-content";
 
@@ -12,8 +12,7 @@ export function Footer() {
           <img src={content.images.logo} alt="CORRES DO ZK" className="h-auto w-[220px] max-w-full object-contain sm:w-[250px]" />
           <p className="mt-5 max-w-sm text-sm leading-6 text-white/55">O corre não para. O estilo acompanha.</p>
           <div className="mt-6 flex gap-2">
-            <a href="https://www.instagram.com/corresdozk/" target="_blank" rel="noreferrer" aria-label="Instagram da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-white/15 transition hover:border-primary hover:text-primary"><Instagram className="h-4 w-4" /></a>
-            <a href="https://www.tiktok.com/@corresdozk" target="_blank" rel="noreferrer" aria-label="TikTok da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-white/15 transition hover:border-primary hover:text-primary"><Play className="h-4 w-4" /></a>
+            <a href="https://www.instagram.com/corre_do_zk?stkn=MTN6MnZ5dmp3NmtwOQ==" target="_blank" rel="noreferrer" aria-label="Instagram da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-white/15 transition hover:border-primary hover:text-primary"><Instagram className="h-4 w-4" /></a>
             <a href="https://wa.me/5518997087679" target="_blank" rel="noreferrer" aria-label="WhatsApp da CORRES DO ZK" className="zk-focus inline-flex h-10 w-10 items-center justify-center border border-white/15 transition hover:border-primary hover:text-primary"><MessageCircle className="h-4 w-4" /></a>
           </div>
         </div>
